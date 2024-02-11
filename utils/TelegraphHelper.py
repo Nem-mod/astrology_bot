@@ -19,6 +19,17 @@ class TelegraphHelper():
             _("Success Story"),
         ]
 
+        self.TOPIC_IMAGES = [
+            "sources/natal_chart/pre_generated_images/strength_0.png",
+            "sources/natal_chart/pre_generated_images/career_0.png",
+            "sources/natal_chart/pre_generated_images/mission_0.png",
+            "sources/natal_chart/pre_generated_images/relationship_0.png",
+            "sources/natal_chart/pre_generated_images/harmony_0.png",
+            "sources/natal_chart/pre_generated_images/finance_0.png",
+            "sources/natal_chart/pre_generated_images/blog_0.png",
+            "sources/natal_chart/pre_generated_images/success_history_0.png"
+
+        ]
         self.TOPICS_PROMPTS = [
             _("Describe 5 unique strengths of the User and 3 areas for growth that they should work on. The answer must "
              "contain no more than 1000 characters. Add emoji. The answer to this question is based on the analysis of "
