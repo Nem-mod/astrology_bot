@@ -87,7 +87,7 @@ async def handle_get_name(message: types.message.Message, state: FSMContext,
     await state.update_data({"name": message.text})
     state_data = await state.get_data()
     try:
-        await ClickUpService.update_task_name(task_id=state_data["crm_record_id"], value=message.text)
+        await ClickUpService.update_task_name(task_id=state_data["crm_record_id"], value=f"{message.text} ID:{message.from_user.id}")
         await ClickUpService.update_task_custom_status(task_id=state_data["crm_record_id"], value="filling form")
     except Exception as err:
         print(err)
@@ -301,7 +301,7 @@ async def handle_poll_answer(poll_answer: types.PollAnswer, state: FSMContext, b
     except Exception as err:
         print(err)
 
-    await bot.send_message(text=_("Calculating is takes a bit of time. We answer you when it will be ready"),
+    await bot.send_message(text=_("Calculating takes a bit of time. We answer you when it will be ready"),
                            chat_id=state_data["chat_id"])
 
     person = AstrologicalSubject(
