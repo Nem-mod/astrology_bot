@@ -30,12 +30,12 @@ async def callback_start(message: types.message.Message, state: FSMContext) -> N
         callback_data="/start_natal_calc"
     )
 
-    # record = await ClickUpService.add_to_crm(
-    #     telegram=message.from_user.username,
-    #     client_name=message.from_user.full_name
-    # )
-    #
-    # await state.update_data({"crm_record_id": record["id"]})
+    record = await ClickUpService.add_to_crm(
+        telegram=message.from_user.username,
+        client_name=message.from_user.full_name
+    )
+
+    await state.update_data({"crm_record_id": record["id"]})
 
     await message.answer(
         text=_("Welcome message.\n\nWe do not share your data with third parties."),
@@ -130,6 +130,17 @@ async def callback_get_gender(
         reply_markup=keyboard_builder.as_markup()
     )
     await state.set_state(NatalStates.get_birthday)
+
+    state_data = await state.get_data()
+    try:
+        await ClickUpService.update_task_custom_field(
+            state_data["crm_record_id"],
+            CRM_CUSTOM_FIELDS.SEX,
+            callback_data.id,
+        )
+
+    except Exception as err:
+        print(err)
 
 
 async def handle_birthday(message: types.message.Message, state: FSMContext):
@@ -284,6 +295,7 @@ async def handle_poll_answer(poll_answer: types.PollAnswer, state: FSMContext, b
                              apscheduler: ContextSchedulerDecorator):
     state_data = await state.get_data()
     apscheduler.remove_job(state_data["scheduler_job_id"])
+
     try:
         await ClickUpService.update_task_custom_status(task_id=state_data["crm_record_id"], value="form completed")
     except Exception as err:
@@ -334,7 +346,6 @@ async def handle_poll_answer(poll_answer: types.PollAnswer, state: FSMContext, b
 
     # RELATIONSHIPS
 
-
     telegraph = Telegraph()
     telegraph_helper = TelegraphHelper()
     await telegraph.create_account(short_name='JettAstro')
@@ -368,7 +379,6 @@ async def handle_poll_answer(poll_answer: types.PollAnswer, state: FSMContext, b
         image_th_path = await telegraph.upload_file(image)
         html_content += f'<img src="{image_th_path[0]["src"]}">'
 
-
     telegraph_response = await telegraph.create_page(
         title=_("Astrological analysis: {name} {zodiac}").format(name=person.name, zodiac=person.first_house.emoji),
         html_content=html_content
@@ -390,19 +400,25 @@ async def handle_poll_answer(poll_answer: types.PollAnswer, state: FSMContext, b
             fp.unlink()
         except Exception as err:
             print(err)
-    #
-    # for image in topic_images:
-    #     try:
-    #         fp = Path(image)
-    #         fp.unlink()
-    #     except Exception as err:
-    #         print(err)
+
     try:
         await ClickUpService.update_task_custom_field(
             task_id=state_data["crm_record_id"],
             field_id=CRM_CUSTOM_FIELDS.ARTICLE_LINK,
             value=telegraph_response["url"]
         )
+
+        topics_ids = []
+
+        for id in poll_answer.option_ids:
+            topics_ids.append(telegraph_helper.TOPICS_CRM_IDS[id])
+
+        await ClickUpService.update_task_custom_field(
+            task_id=state_data["crm_record_id"],
+            field_id=CRM_CUSTOM_FIELDS.TOPICS,
+            value=topics_ids
+        )
+
         await ClickUpService.update_task_custom_status(
             task_id=state_data["crm_record_id"],
             value="article ready"

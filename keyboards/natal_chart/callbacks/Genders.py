@@ -8,3 +8,4 @@ class Genders(str, Enum):
 
 class GendersCallback(CallbackData, prefix="gend"):
     gender: Genders
+    id: str

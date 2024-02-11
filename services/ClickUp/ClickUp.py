@@ -15,9 +15,11 @@ CLICKUP_CRM_ID = config.clickup.crm_id
 
 class CRM_CUSTOM_FIELDS(str, Enum):
     TELEGRAM_ID = "cd228d63-d118-406b-903f-97b03209ddc0",
+    SEX = "64d2a760-ed3c-4424-b33d-428979b559fe"
     BIRTHDAY = "c860a287-52b1-4095-9339-1dfe4bba877e",
     BIRTHTIME = "14eb889b-6164-4fff-9d1c-0389416a6c3f",
-    ARTICLE_LINK = "e9560160-fe39-4140-9888-a8ce29040950"
+    ARTICLE_LINK = "e9560160-fe39-4140-9888-a8ce29040950",
+    TOPICS = "81700ed7-6a79-43fc-af07-452d7247aef8"
 
 class ClickUpService:
     @staticmethod

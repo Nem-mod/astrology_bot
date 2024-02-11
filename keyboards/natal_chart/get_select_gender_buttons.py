@@ -10,14 +10,16 @@ def get_select_gender_buttons() -> InlineKeyboardMarkup:
     keyboard_builder.button(
         text=_("Male"),
         callback_data=GendersCallback(
-            gender=Genders.MALE
+            gender=Genders.MALE,
+            id="10cba086-f44b-4201-8852-2eac88866775"
         )
     )
 
     keyboard_builder.button(
         text=_("Female"),
         callback_data=GendersCallback(
-            gender=Genders.FEMALE
+            gender=Genders.FEMALE,
+            id="da3d635c-44a7-4aac-b30a-ba3e21a3128d"
         )
     )
 
