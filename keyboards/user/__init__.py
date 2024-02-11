@@ -1,0 +1,1 @@
+from .get_locales_buttons import get_locales_buttons

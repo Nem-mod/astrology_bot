@@ -28,6 +28,11 @@ class RedisStorage:
     password: str
     redis_enabled: bool
 
+@dataclass
+class ClickUp:
+    token: str
+    crm_id: str
+
 
 @dataclass
 class Config:
@@ -35,6 +40,7 @@ class Config:
     server: HttpClient
     openai: OpenAI
     redis: RedisStorage
+    clickup: ClickUp
 
 
 def load_config(path: str = None) -> Config:
@@ -58,5 +64,9 @@ def load_config(path: str = None) -> Config:
             port=env.int("REDIS_PORT"),
             password=env.str("REDIS_PASS"),
             redis_enabled=env.bool("REDIS_STORAGE_ENABLE", "false")
+        ),
+        clickup=ClickUp(
+            token=env.str('CLICK_UP_TOKEN'),
+            crm_id=env.str('CLICK_UP_CRM_ID')
         )
     )
