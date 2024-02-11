@@ -99,19 +99,19 @@ async def handle_get_name(message: types.message.Message, state: FSMContext,
         reply_markup=buttons
     )
 
-    scheduler_job_id = f"form_{message.from_user.id}"
-    await state.update_data({"scheduler_job_id": scheduler_job_id})
-    apscheduler.add_job(
-        form_not_completed,
-        trigger="date",
-        run_date=datetime.now() + timedelta(minutes=30),
-        id=scheduler_job_id,
-        kwargs={
-            "message": message,
-            "crm_record_id": state_data["crm_record_id"]
-        }
-    )
-
+    # scheduler_job_id = f"form_{message.from_user.id}"
+    # job = apscheduler.add_job(
+    #     form_not_completed,
+    #     trigger="date",
+    #     run_date=datetime.now() + timedelta(minutes=30),
+    #     id=scheduler_job_id,
+    #     kwargs={
+    #         "message": message,
+    #         "crm_record_id": state_data["crm_record_id"]
+    #     }
+    # )
+    #
+    # await state.update_data({"scheduler_job_id": job.id})
 
 async def callback_get_gender(
         callback_query: types.CallbackQuery,
@@ -294,8 +294,8 @@ async def callback_chose_city(callback_query: types.CallbackQuery, state: FSMCon
 async def handle_poll_answer(poll_answer: types.PollAnswer, state: FSMContext, bot: Bot,
                              apscheduler: ContextSchedulerDecorator):
     state_data = await state.get_data()
-    apscheduler.remove_job(state_data["scheduler_job_id"])
-
+    # print(state_data["scheduler_job_id"], state_data)
+    # apscheduler.remove_job(state_data["scheduler_job_id"])
     try:
         await ClickUpService.update_task_custom_status(task_id=state_data["crm_record_id"], value="form completed")
     except Exception as err:
