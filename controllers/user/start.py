@@ -1,5 +1,5 @@
 import re
-from datetime import datetime
+from datetime import datetime, timedelta
 from pathlib import Path
 
 from aiogram import types, Bot
@@ -30,12 +30,12 @@ async def callback_start(message: types.message.Message, state: FSMContext) -> N
         callback_data="/start_natal_calc"
     )
 
-    record = await ClickUpService.add_to_crm(
-        telegram=message.from_user.username,
-        client_name=message.from_user.full_name
-    )
-
-    await state.update_data({"crm_record_id": record["id"]})
+    # record = await ClickUpService.add_to_crm(
+    #     telegram=message.from_user.username,
+    #     client_name=message.from_user.full_name
+    # )
+    #
+    # await state.update_data({"crm_record_id": record["id"]})
 
     await message.answer(
         text=_("Welcome message.\n\nWe do not share your data with third parties."),
@@ -73,6 +73,15 @@ async def callback_select_language(
     )
 
 
+async def form_not_completed(message: types.message.Message, crm_record_id: str):
+    await message.answer(
+        _("Any difficulties? Do you ask your mother your birth time? Do you doubt AstroBot? Keep going, "
+          "it will be interesting! Instead of mom, write @maginoid to get help")
+    )
+
+    await ClickUpService.update_task_custom_status(task_id=crm_record_id, value="form not completed")
+
+
 async def handle_get_name(message: types.message.Message, state: FSMContext,
                           apscheduler: ContextSchedulerDecorator) -> None:
     await state.update_data({"name": message.text})
@@ -82,11 +91,25 @@ async def handle_get_name(message: types.message.Message, state: FSMContext,
         await ClickUpService.update_task_custom_status(task_id=state_data["crm_record_id"], value="filling form")
     except Exception as err:
         print(err)
+
     buttons = get_select_gender_buttons()
     await state.set_state(NatalStates.ignore)
     await message.answer(
         text=_("Choose your gender"),
         reply_markup=buttons
+    )
+
+    scheduler_job_id = f"form_{message.from_user.id}"
+    await state.update_data({"scheduler_job_id": scheduler_job_id})
+    apscheduler.add_job(
+        form_not_completed,
+        trigger="date",
+        run_date=datetime.now() + timedelta(minutes=30),
+        id=scheduler_job_id,
+        kwargs={
+            "message": message,
+            "crm_record_id": state_data["crm_record_id"]
+        }
     )
 
 
@@ -257,8 +280,10 @@ async def callback_chose_city(callback_query: types.CallbackQuery, state: FSMCon
     )
 
 
-async def handle_poll_answer(poll_answer: types.PollAnswer, state: FSMContext, bot: Bot):
+async def handle_poll_answer(poll_answer: types.PollAnswer, state: FSMContext, bot: Bot,
+                             apscheduler: ContextSchedulerDecorator):
     state_data = await state.get_data()
+    apscheduler.remove_job(state_data["scheduler_job_id"])
     try:
         await ClickUpService.update_task_custom_status(task_id=state_data["crm_record_id"], value="form completed")
     except Exception as err:
