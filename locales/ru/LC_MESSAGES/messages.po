@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2024-02-09 15:06+0200\n"
-"PO-Revision-Date: 2024-02-09 15:08+0200\n"
+"POT-Creation-Date: 2024-02-11 16:42+0200\n"
+"PO-Revision-Date: 2024-02-11 16:50+0200\n"
 "Last-Translator: \n"
 "Language-Team: ru <LL@li.org>\n"
 "Language: ru\n"
@@ -21,23 +21,23 @@ msgstr ""
 "X-Generator: Poedit 3.4.2\n"
 
 #: controllers/user/back_handlers.py:17 controllers/user/back_handlers.py:40
-#: controllers/user/start.py:57 controllers/user/start.py:87
-#: controllers/user/start.py:116 controllers/user/start.py:136
-#: controllers/user/start.py:161
+#: controllers/user/start.py:67 controllers/user/start.py:125
+#: controllers/user/start.py:165 controllers/user/start.py:202
+#: controllers/user/start.py:239
 #: keyboards/natal_chart/get_geonames_buttons.py:25
-#: keyboards/natal_chart/get_select_gender_buttons.py:25
+#: keyboards/natal_chart/get_select_gender_buttons.py:27
 msgid "⬅️ Back"
 msgstr "⬅️ Назад"
 
-#: controllers/user/back_handlers.py:21 controllers/user/start.py:61
+#: controllers/user/back_handlers.py:21 controllers/user/start.py:71
 msgid "What is your name?"
 msgstr "Как Вас зовут?"
 
-#: controllers/user/back_handlers.py:30 controllers/user/start.py:73
+#: controllers/user/back_handlers.py:30 controllers/user/start.py:98
 msgid "Choose your gender"
 msgstr "Выберите свой пол"
 
-#: controllers/user/back_handlers.py:44 controllers/user/start.py:91
+#: controllers/user/back_handlers.py:44 controllers/user/start.py:129
 msgid ""
 "Enter the day, month and year of your birth in the format DD.MM.YYYY. For "
 "example: 31.12.1990"
@@ -45,11 +45,11 @@ msgstr ""
 "Введите день, месяц и год вашего рождения в формате ДД.ММ.ГГГГ. Например: "
 "31.12.1990"
 
-#: controllers/user/start.py:27
+#: controllers/user/start.py:29
 msgid "Start calculation"
 msgstr "Начать расчет"
 
-#: controllers/user/start.py:31
+#: controllers/user/start.py:41
 msgid ""
 "Welcome message.\n"
 "\n"
@@ -59,59 +59,69 @@ msgstr ""
 "\n"
 "Мы не передаем ваши данные третьим лицам."
 
-#: controllers/user/start.py:40
+#: controllers/user/start.py:50
 msgid "Please choose your language 🌐"
 msgstr "Пожалуйста, выберите язык 🌐"
 
-#: controllers/user/start.py:100
+#: controllers/user/start.py:78
+msgid ""
+"Any difficulties? Do you ask your mother your birth time? Do you doubt "
+"AstroBot? Keep going, it will be interesting! Instead of mom, write "
+"@maginoid to get help"
+msgstr ""
+"Есть трудности? Вы спрашиваете у матери время вашего рождения? Вы "
+"сомневаетесь в AstroBot? Продолжайте, будет интересно! Вместо мамы напишите "
+"@maginoid, чтобы получить помощь"
+
+#: controllers/user/start.py:149
 msgid "Inputted value is invalid, correct format is DD.MM.YYYY"
 msgstr "Введенное значение недействительно, правильный формат - ДД.ММ.ГГГГ"
 
-#: controllers/user/start.py:112 keyboards/natal_chart/SimpleTimeChooser.py:67
+#: controllers/user/start.py:161 keyboards/natal_chart/SimpleTimeChooser.py:67
 msgid "I dont know exact time"
 msgstr "Я не знаю точного времени"
 
-#: controllers/user/start.py:121
+#: controllers/user/start.py:170
 msgid ""
 "What time were you born? Type a time in 24 hours format HH:mm. For example: "
 "23:20.  If you don't know, select 'I don't know exact time' we will use "
 "default time."
 msgstr ""
 "В какое время ты родился? Введите время в 24-часовом формате ЧЧ:мм. "
-"Например: 23:20. Если вы не знаете, выберите «Я не знаю точного времени», мы "
-"будем использовать время по умолчанию."
+"Например: 23:20. Если вы не знаете, выберите «Я не знаю точного времени», "
+"мы будем использовать время по умолчанию."
 
-#: controllers/user/start.py:140 controllers/user/start.py:166
+#: controllers/user/start.py:206 controllers/user/start.py:244
 msgid "Write the city and country of birth, for example: Nikolaev, Ukraine."
 msgstr "Напишите город и страну рождения, например: Николаев, Украина."
 
-#: controllers/user/start.py:150
+#: controllers/user/start.py:228
 msgid "Inputted value is invalid, correct format is HH:MM"
 msgstr "Введенное значение неверно. Правильный формат: ЧЧ:ММ"
 
-#: controllers/user/start.py:176
+#: controllers/user/start.py:265
 msgid "<b>Confirm your place of birth:</b>"
 msgstr "<b>Подтвердите свое место рождения:</b>"
 
-#: controllers/user/start.py:192
+#: controllers/user/start.py:281
 msgid "You location {location_name} confirmed"
 msgstr "Ваше местоположение {location_name} подтверждено"
 
-#: controllers/user/start.py:200
+#: controllers/user/start.py:289
 msgid "Choose topics that interest you (at least one):"
 msgstr "Выберите темы, которые вас интересуют (хотя бы одну):"
 
-#: controllers/user/start.py:207
-msgid "Calculating is takes a bit of time. We answer you when it will be ready"
-msgstr "Расчет занимает некоторое время. Мы ответим вам, когда он будет готов"
+#: controllers/user/start.py:304
+msgid "Calculating takes a bit of time. We answer you when it will be ready"
+msgstr "Расчет занимает немного времени. Мы ответим вам, когда он будет готов"
 
-#: controllers/user/start.py:228
+#: controllers/user/start.py:328
 msgid ""
 "You're an astrologer aiming for maximum personalization of responses based "
 "on the user's astrological data. Communicate using \"you\", adopting a "
 "youthful style with elements of modern slang, but do so flexibly and "
-"appropriately. Inject humor and amusing descriptions where it's adequate and "
-"cannot be misinterpreted.\n"
+"appropriately. Inject humor and amusing descriptions where it's adequate "
+"and cannot be misinterpreted.\n"
 "\n"
 "You must response in HTML format. Use only AVAILEBLE HTML tags\n"
 " AVAILABLE HTML tags are <p>, <b>, <i>"
@@ -125,7 +135,7 @@ msgstr ""
 "Вы должны ответить в формате HTML. Используйте только ДОСТУПНЫЕ HTML-теги.\n"
 " ДОСТУПНЫЕ HTML-теги: <p>, <b>, <i>"
 
-#: controllers/user/start.py:235
+#: controllers/user/start.py:335
 msgid ""
 "Perform a detailed astrological analysis of the user's natal chart.  Don't "
 "forget to write in your answer  house numbers when responding.\n"
@@ -137,11 +147,11 @@ msgstr ""
 "Имя клиента {name}\n"
 "Данные: {astro_data}"
 
-#: controllers/user/start.py:282
+#: controllers/user/start.py:383
 msgid "Astrological analysis: {name} {zodiac}"
 msgstr "Астрологический анализ: {name} {zodiac}"
 
-#: controllers/user/start.py:289
+#: controllers/user/start.py:390
 msgid ""
 "We created your transcription of natala chart you can read it there <a "
 "href=\"{link}\">link</a>"
@@ -157,20 +167,20 @@ msgstr "Подтвердить"
 msgid "Male"
 msgstr "Мужской"
 
-#: keyboards/natal_chart/get_select_gender_buttons.py:18
+#: keyboards/natal_chart/get_select_gender_buttons.py:19
 msgid "Female"
 msgstr "Женский"
 
 #: utils/TelegraphHelper.py:6
 msgid ""
-"<p><i>A detailed analysis of your natal chart and an in-depth interpretation "
-"of your personality using artificial intelligence trained on the best "
-"practices of Western astrology. Made with <a href=\"https://t.me/"
+"<p><i>A detailed analysis of your natal chart and an in-depth "
+"interpretation of your personality using artificial intelligence trained on "
+"the best practices of Western astrology. Made with <a href=\"https://t.me/"
 "astrolog_ai_bot\"> AstroBot</a>.</i></p>"
 msgstr ""
 "<p><i>Детальный анализ вашей натальной карты и глубокая интерпретация вашей "
-"личности с помощью искусственного интеллекта, обученного на лучших практиках "
-"западной астрологии. Сделано с помощью <a href=\"https://t.me/"
+"личности с помощью искусственного интеллекта, обученного на лучших "
+"практиках западной астрологии. Сделано с помощью <a href=\"https://t.me/"
 "astrolog_ai_bot\"> AstroBot</a>.</i></p>"
 
 #: utils/TelegraphHelper.py:12
@@ -205,7 +215,7 @@ msgstr "Темы блога"
 msgid "Success Story"
 msgstr "История успеха"
 
-#: utils/TelegraphHelper.py:23
+#: utils/TelegraphHelper.py:45
 msgid ""
 "Describe 5 unique strengths of the User and 3 areas for growth that they "
 "should work on. The answer must contain no more than 1000 characters. Add "
@@ -214,20 +224,21 @@ msgid ""
 msgstr ""
 "Опишите 5 уникальных сильных сторон Пользователя и 3 области роста, над "
 "которыми ему следует работать. Ответ должен содержать не более 1000 "
-"символов. Добавьте смайлы. Ответ на этот вопрос основан на анализе натальной "
-"карты."
+"символов. Добавьте смайлы. Ответ на этот вопрос основан на анализе "
+"натальной карты."
 
-#: utils/TelegraphHelper.py:26
+#: utils/TelegraphHelper.py:48
 msgid ""
 "What fields of activity could the user engage in to fully realize "
-"themselves? The answer must contain no more than 1500 characters. Add emoji. "
-"The answer to this question is based on the analysis of the natal chart."
+"themselves? The answer must contain no more than 1500 characters. Add "
+"emoji. The answer to this question is based on the analysis of the natal "
+"chart."
 msgstr ""
 "Какими сферами деятельности мог бы заняться пользователь, чтобы полностью "
 "реализовать себя? Ответ должен содержать не более 1500 символов. Добавьте "
 "смайлики. Ответ на этот вопрос основан на анализе натальной карты."
 
-#: utils/TelegraphHelper.py:29
+#: utils/TelegraphHelper.py:51
 msgid ""
 "What is the User’s mission? How can the User benefit humanity? The answer "
 "must contain no more than 1500 characters. Add emoji. The answer to this "
@@ -237,27 +248,27 @@ msgstr ""
 "человечеству? Ответ должен содержать не более 1500 символов. Добавьте "
 "смайлики. Ответ на этот вопрос основан на анализе натальной карты."
 
-#: utils/TelegraphHelper.py:31
+#: utils/TelegraphHelper.py:53
 msgid ""
 "With what partner can the User build harmonious relationships? The answer "
 "must contain no more than 1000 characters. Add emoji. The answer to this "
 "question is based on the analysis of the natal chart."
 msgstr ""
-"С каким партнером Пользователь сможет построить гармоничные отношения? Ответ "
-"должен содержать не более 1000 символов. Добавьте смайлы. Ответ на этот "
-"вопрос основан на анализе натальной карты."
+"С каким партнером Пользователь сможет построить гармоничные отношения? "
+"Ответ должен содержать не более 1000 символов. Добавьте смайлы. Ответ на "
+"этот вопрос основан на анализе натальной карты."
 
-#: utils/TelegraphHelper.py:33
+#: utils/TelegraphHelper.py:55
 msgid ""
 "How can the User achieve harmony and balance in life? Highlight 5 key "
-"points. The answer must contain no more than 1000 characters. Add emoji. The "
-"answer to this question is based on the analysis of the natal chart."
+"points. The answer must contain no more than 1000 characters. Add emoji. "
+"The answer to this question is based on the analysis of the natal chart."
 msgstr ""
 "Как Пользователю достичь гармонии и баланса в жизни? Выделите 5 ключевых "
 "моментов. Ответ должен содержать не более 1000 символов. Добавьте смайлы. "
 "Ответ на этот вопрос основан на анализе натальной карты."
 
-#: utils/TelegraphHelper.py:36
+#: utils/TelegraphHelper.py:58
 msgid ""
 "How can the User achieve financial well-being? Describe one of the most "
 "suitable paths for the User. The answer must contain no more than 2000 "
@@ -270,11 +281,11 @@ msgstr ""
 "подходящих путей для Пользователя. Ответ должен содержать не более 2000 "
 "символов. Добавьте смайлики. Ответ на этот вопрос основан на анализе "
 "натальной карты. Дайте несколько советов для достижения финансового "
-"благополучия. Дайте несколько советов по финансовой грамотности. Рассмотрим, "
-"какие финансовые ошибки может совершить пользователь. Посоветуйте, какие "
-"книги прочитать для этой цели."
+"благополучия. Дайте несколько советов по финансовой грамотности. "
+"Рассмотрим, какие финансовые ошибки может совершить пользователь. "
+"Посоветуйте, какие книги прочитать для этой цели."
 
-#: utils/TelegraphHelper.py:41
+#: utils/TelegraphHelper.py:63
 msgid ""
 "How should a user express himself on a blog?\n"
 "\n"
@@ -324,17 +335,17 @@ msgstr ""
 "Ответ должен быть не более 1500 символов. Добавьте смайлик. Ответ на этот "
 "вопрос основан на анализе натальной карты.\n"
 
-#: utils/TelegraphHelper.py:63
+#: utils/TelegraphHelper.py:85
 msgid ""
-"Write the User's success story based on the data from their natal chart. The "
-"answer must contain no more than 2000 characters. Add emoji. The answer to "
-"this question is based on all previous answers."
+"Write the User's success story based on the data from their natal chart. "
+"The answer must contain no more than 2000 characters. Add emoji. The answer "
+"to this question is based on all previous answers."
 msgstr ""
 "Напишите историю успеха Пользователя на основе данных его натальной карты. "
 "Ответ должен содержать не более 2000 символов. Добавьте смайлы. Ответ на "
 "этот вопрос основан на всех предыдущих ответах."
 
-#: utils/TelegraphHelper.py:68
+#: utils/TelegraphHelper.py:90
 msgid ""
 "<h3>Strengths & Weaknesses</h3><blockquote dir=\"auto\">What sets you apart "
 "from others, what is your superpower? And what are the growth points?</"
@@ -343,7 +354,7 @@ msgstr ""
 "<h3>Сильные и слабые стороны</h3><blockquote dir=\"auto\">Что отличает вас "
 "от других, в чем ваша суперсила? И какие точки роста?</blockquote>"
 
-#: utils/TelegraphHelper.py:71
+#: utils/TelegraphHelper.py:93
 msgid ""
 "<h3>Career & Realization</h3><blockquote dir=\"auto\">Areas for your "
 "realization</blockquote>"
@@ -351,7 +362,7 @@ msgstr ""
 "<h3>Карьера и реализация</h3><blockquote dir=\"auto\">Области вашей "
 "реализации</blockquote>"
 
-#: utils/TelegraphHelper.py:73
+#: utils/TelegraphHelper.py:95
 msgid ""
 "<h3>Mission</h3><blockquote dir=\"auto\">Areas in which you will benefit "
 "this world by realizing yourself</blockquote>"
@@ -359,15 +370,15 @@ msgstr ""
 "<h3>Миссия</h3><blockquote dir=\"auto\">Области, в которых вы принесете "
 "пользу этому миру, реализовав себя</blockquote>"
 
-#: utils/TelegraphHelper.py:75
+#: utils/TelegraphHelper.py:97
 msgid ""
-"<h3>Relationships</h3><blockquote dir=\"auto\">Which partner can you build a "
-"harmonious relationship with?</blockquote>"
+"<h3>Relationships</h3><blockquote dir=\"auto\">Which partner can you build "
+"a harmonious relationship with?</blockquote>"
 msgstr ""
 "<h3>Отношения</h3><blockquote dir=\"auto\">С каким партнером вы сможете "
 "построить гармоничные отношения?</blockquote>"
 
-#: utils/TelegraphHelper.py:77
+#: utils/TelegraphHelper.py:99
 msgid ""
 "<h3>Harmony & Balance</h3><blockquote dir=\"auto\">What will help you "
 "achieve them?</blockquote>"
@@ -375,7 +386,7 @@ msgstr ""
 "<h3>Гармония и баланс</h3><blockquote dir=\"auto\">Что поможет вам их "
 "достичь?</blockquote>"
 
-#: utils/TelegraphHelper.py:79
+#: utils/TelegraphHelper.py:101
 msgid ""
 "<h3>Finances</h3><blockquote dir=\"auto\">What will help you achieve "
 "financial success?</blockquote>"
@@ -383,19 +394,19 @@ msgstr ""
 "<h3>Финансы</h3><blockquote dir=\"auto\">Что поможет вам добиться "
 "финансового успеха?</blockquote>"
 
-#: utils/TelegraphHelper.py:81
+#: utils/TelegraphHelper.py:103
 msgid ""
-"<h3>Blog Topics</h3><blockquote dir=\"auto\">Recommendations and ideas for a "
-"blog.</blockquote>"
+"<h3>Blog Topics</h3><blockquote dir=\"auto\">Recommendations and ideas for "
+"a blog.</blockquote>"
 msgstr ""
 "<h3>Темы блога</h3><blockquote dir=\"auto\">Рекомендации и идеи для блога.</"
 "blockquote>"
 
-#: utils/TelegraphHelper.py:83
+#: utils/TelegraphHelper.py:105
 msgid ""
-"<h3>Success Story</h3><blockquote dir=\"auto\">Estimated life path, based on "
-"the position of the planets at the time of your birth (consider it one of "
-"the likely successful paths of life development).</blockquote>"
+"<h3>Success Story</h3><blockquote dir=\"auto\">Estimated life path, based "
+"on the position of the planets at the time of your birth (consider it one "
+"of the likely successful paths of life development).</blockquote>"
 msgstr ""
 "<h3>История успеха</h3><blockquote dir=\"auto\">Предполагаемый жизненный "
 "путь, основанный на положении планет в момент вашего рождения (считайте это "

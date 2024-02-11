@@ -352,23 +352,19 @@ async def handle_poll_answer(poll_answer: types.PollAnswer, state: FSMContext, b
 
     html_content = f"{telegraph_helper.HEADER}"
 
-    # for completion in completions_list:
-    #     html_content += (f"<p>{completion}</p>")
-
-    # topic_images = []
     for id in poll_answer.option_ids:
         temp_comp, tmp_msg = await openai_service.chat_completion(
             telegraph_helper.TOPICS_PROMPTS[id],
             system_prompt=system_prompt,
             messages=messages
         )
-        # temp_images = await openai_service.image_generation(
-        #     f"Create image about {telegraph_helper.TOPICS[id]} topic with astrologic twist.")
-        temp_image = telegraph_helper.TOPIC_IMAGES[id]
-        # topic_images.append(temp_image)
-        image_th_path = await telegraph.upload_file(temp_image)
+        try:
+            temp_image = telegraph_helper.TOPIC_IMAGES[id]
+            image_th_path = await telegraph.upload_file(temp_image)
 
-        html_content += f'<img src="{image_th_path[0]["src"]}">'
+            html_content += f'<img src="{image_th_path[0]["src"]}">'
+        except:
+            pass
         html_content += telegraph_helper.BLOCKQUOTE_LIST[id]
         html_content += (temp_comp)
 
