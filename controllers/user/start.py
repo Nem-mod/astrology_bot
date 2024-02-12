@@ -24,12 +24,6 @@ from utils.create_table_chart import create_table_chart
 
 
 async def callback_start(message: types.message.Message, state: FSMContext) -> None:
-    keyboard_builder = InlineKeyboardBuilder()
-    keyboard_builder.button(
-        text=_("Start calculation"),
-        callback_data="/start_natal_calc"
-    )
-
     record = await ClickUpService.add_to_crm(
         telegram=message.from_user.username,
         client_name=message.from_user.full_name
@@ -37,32 +31,16 @@ async def callback_start(message: types.message.Message, state: FSMContext) -> N
 
     await state.update_data({"crm_record_id": record["id"]})
 
-    await message.answer(
-        text=_("Welcome message.\n\nWe do not share your data with third parties."),
-        reply_markup=keyboard_builder.as_markup()
-    )
-
-
-async def callback_start_calculation(callback_query: types.CallbackQuery, state: FSMContext,
-                                     apscheduler: ContextSchedulerDecorator):
     buttons = get_locales_buttons()
-    await callback_query.message.answer(
+    await message.answer(
         text=_("Please choose your language 🌐"),
         reply_markup=buttons
     )
 
 
-async def callback_select_language(
-        callback_query: types.CallbackQuery,
-        state: FSMContext,
-        apscheduler: ContextSchedulerDecorator,
-        callback_data: SetLocalesCallback,
-        i18n_middleware: FSMI18nMiddleware
-):
-    await i18n_middleware.set_locale(state, callback_data.locale)
-
-    await state.set_state(NatalStates.get_name)
+async def callback_start_calculation(callback_query: types.CallbackQuery, state: FSMContext):
     keyboard_builder = InlineKeyboardBuilder()
+
     keyboard_builder.button(
         text=_("⬅️ Back"),
         callback_data="/cancel_creating_natal_chart"
@@ -73,10 +51,31 @@ async def callback_select_language(
     )
 
 
-async def form_not_completed(message: types.message.Message, crm_record_id: str):
-    await message.answer(
-        _("Any difficulties? Do you ask your mother your birth time? Do you doubt AstroBot? Keep going, "
-          "it will be interesting! Instead of mom, write @maginoid to get help")
+async def callback_select_language(
+        callback_query: types.CallbackQuery,
+        state: FSMContext,
+        callback_data: SetLocalesCallback,
+        i18n_middleware: FSMI18nMiddleware
+):
+    await i18n_middleware.set_locale(state, callback_data.locale)
+
+    await state.set_state(NatalStates.get_name)
+    keyboard_builder = InlineKeyboardBuilder()
+    keyboard_builder.button(
+        text=_("Start calculation"),
+        callback_data="/start_natal_calc"
+    )
+    await callback_query.message.answer(
+        text=_("Hello, I'm the Virtual Astrologer. I'll create your natal chart and interpret it using birth data and "
+               "the current positions of the planets in the sky. Then you can ask me anything you're curious about!"),
+        reply_markup=keyboard_builder.as_markup()
+    )
+
+async def form_not_completed(bot: Bot, chat_id: str, crm_record_id: str):
+    await bot.send_message(
+        chat_id=chat_id,
+        text=_("Any difficulties? Do you ask your mother your birth time? Do you doubt AstroBot? Keep going, "
+               "it will be interesting! Instead of mom, write @maginoid to get help")
     )
 
     await ClickUpService.update_task_custom_status(task_id=crm_record_id, value="form not completed")
@@ -99,27 +98,24 @@ async def handle_get_name(message: types.message.Message, state: FSMContext,
         reply_markup=buttons
     )
 
-    # scheduler_job_id = f"form_{message.from_user.id}"
-    # job = apscheduler.add_job(
-    #     form_not_completed,
-    #     trigger="date",
-    #     run_date=datetime.now() + timedelta(minutes=30),
-    #     id=scheduler_job_id,
-    #     kwargs={
-    #         "message": message,
-    #         "crm_record_id": state_data["crm_record_id"]
-    #     }
-    # )
-    #
-    # await state.update_data({"scheduler_job_id": job.id})
+    job = apscheduler.add_job(
+        form_not_completed,
+        trigger="date",
+        run_date=datetime.now() + timedelta(minutes=30),
+        kwargs={
+            "chat_id": message.from_user.id,
+            "crm_record_id": state_data["crm_record_id"]
+        }
+    )
+    await state.update_data({"scheduler_job_id": job.id})
+
 
 async def callback_get_gender(
         callback_query: types.CallbackQuery,
         state: FSMContext,
-        callback_data: GendersCallback
+        callback_data: GendersCallback,
 ):
     await state.update_data(gender=callback_data.gender)
-
     keyboard_builder = InlineKeyboardBuilder()
     keyboard_builder.button(
         text=_("⬅️ Back"),
@@ -294,8 +290,8 @@ async def callback_chose_city(callback_query: types.CallbackQuery, state: FSMCon
 async def handle_poll_answer(poll_answer: types.PollAnswer, state: FSMContext, bot: Bot,
                              apscheduler: ContextSchedulerDecorator):
     state_data = await state.get_data()
-    # print(state_data["scheduler_job_id"], state_data)
-    # apscheduler.remove_job(state_data["scheduler_job_id"])
+    print(state_data["scheduler_job_id"], state_data)
+    apscheduler.remove_job(state_data["scheduler_job_id"])
     try:
         await ClickUpService.update_task_custom_status(task_id=state_data["crm_record_id"], value="form completed")
     except Exception as err:
