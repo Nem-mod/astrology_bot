@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2024-02-11 16:42+0200\n"
-"PO-Revision-Date: 2024-02-11 16:50+0200\n"
+"POT-Creation-Date: 2024-02-12 14:01+0200\n"
+"PO-Revision-Date: 2024-02-12 14:03+0200\n"
 "Last-Translator: \n"
 "Language-Team: ru <LL@li.org>\n"
 "Language: ru\n"
@@ -21,23 +21,23 @@ msgstr ""
 "X-Generator: Poedit 3.4.2\n"
 
 #: controllers/user/back_handlers.py:17 controllers/user/back_handlers.py:40
-#: controllers/user/start.py:67 controllers/user/start.py:125
-#: controllers/user/start.py:165 controllers/user/start.py:202
-#: controllers/user/start.py:239
+#: controllers/user/start.py:45 controllers/user/start.py:122
+#: controllers/user/start.py:162 controllers/user/start.py:199
+#: controllers/user/start.py:236
 #: keyboards/natal_chart/get_geonames_buttons.py:25
 #: keyboards/natal_chart/get_select_gender_buttons.py:27
 msgid "⬅️ Back"
 msgstr "⬅️ Назад"
 
-#: controllers/user/back_handlers.py:21 controllers/user/start.py:71
+#: controllers/user/back_handlers.py:21 controllers/user/start.py:49
 msgid "What is your name?"
 msgstr "Как Вас зовут?"
 
-#: controllers/user/back_handlers.py:30 controllers/user/start.py:98
+#: controllers/user/back_handlers.py:30 controllers/user/start.py:97
 msgid "Choose your gender"
 msgstr "Выберите свой пол"
 
-#: controllers/user/back_handlers.py:44 controllers/user/start.py:129
+#: controllers/user/back_handlers.py:44 controllers/user/start.py:126
 msgid ""
 "Enter the day, month and year of your birth in the format DD.MM.YYYY. For "
 "example: 31.12.1990"
@@ -45,25 +45,25 @@ msgstr ""
 "Введите день, месяц и год вашего рождения в формате ДД.ММ.ГГГГ. Например: "
 "31.12.1990"
 
-#: controllers/user/start.py:29
-msgid "Start calculation"
-msgstr "Начать расчет"
-
-#: controllers/user/start.py:41
-msgid ""
-"Welcome message.\n"
-"\n"
-"We do not share your data with third parties."
-msgstr ""
-"Приветственное сообщение.\n"
-"\n"
-"Мы не передаем ваши данные третьим лицам."
-
-#: controllers/user/start.py:50
+#: controllers/user/start.py:36
 msgid "Please choose your language 🌐"
 msgstr "Пожалуйста, выберите язык 🌐"
 
-#: controllers/user/start.py:78
+#: controllers/user/start.py:65
+msgid "Start calculation"
+msgstr "Начать расчет"
+
+#: controllers/user/start.py:69
+msgid ""
+"Hello, I'm the Virtual Astrologer. I'll create your natal chart and "
+"interpret it using birth data and the current positions of the planets in "
+"the sky. Then you can ask me anything you're curious about!"
+msgstr ""
+"Привет, я Виртуальный Астролог. Составлю натальную карту и её толкование, "
+"используя данные о рождении и расположении планет на небе в этот момент. "
+"Потом можешь спросить меня о всем, что тебя интересует!"
+
+#: controllers/user/start.py:77
 msgid ""
 "Any difficulties? Do you ask your mother your birth time? Do you doubt "
 "AstroBot? Keep going, it will be interesting! Instead of mom, write "
@@ -73,15 +73,15 @@ msgstr ""
 "сомневаетесь в AstroBot? Продолжайте, будет интересно! Вместо мамы напишите "
 "@maginoid, чтобы получить помощь"
 
-#: controllers/user/start.py:149
+#: controllers/user/start.py:146
 msgid "Inputted value is invalid, correct format is DD.MM.YYYY"
 msgstr "Введенное значение недействительно, правильный формат - ДД.ММ.ГГГГ"
 
-#: controllers/user/start.py:161 keyboards/natal_chart/SimpleTimeChooser.py:67
+#: controllers/user/start.py:158 keyboards/natal_chart/SimpleTimeChooser.py:67
 msgid "I dont know exact time"
 msgstr "Я не знаю точного времени"
 
-#: controllers/user/start.py:170
+#: controllers/user/start.py:167
 msgid ""
 "What time were you born? Type a time in 24 hours format HH:mm. For example: "
 "23:20.  If you don't know, select 'I don't know exact time' we will use "
@@ -91,31 +91,31 @@ msgstr ""
 "Например: 23:20. Если вы не знаете, выберите «Я не знаю точного времени», "
 "мы будем использовать время по умолчанию."
 
-#: controllers/user/start.py:206 controllers/user/start.py:244
+#: controllers/user/start.py:203 controllers/user/start.py:241
 msgid "Write the city and country of birth, for example: Nikolaev, Ukraine."
 msgstr "Напишите город и страну рождения, например: Николаев, Украина."
 
-#: controllers/user/start.py:228
+#: controllers/user/start.py:225
 msgid "Inputted value is invalid, correct format is HH:MM"
 msgstr "Введенное значение неверно. Правильный формат: ЧЧ:ММ"
 
-#: controllers/user/start.py:265
+#: controllers/user/start.py:262
 msgid "<b>Confirm your place of birth:</b>"
 msgstr "<b>Подтвердите свое место рождения:</b>"
 
-#: controllers/user/start.py:281
+#: controllers/user/start.py:278
 msgid "You location {location_name} confirmed"
 msgstr "Ваше местоположение {location_name} подтверждено"
 
-#: controllers/user/start.py:289
+#: controllers/user/start.py:286
 msgid "Choose topics that interest you (at least one):"
 msgstr "Выберите темы, которые вас интересуют (хотя бы одну):"
 
-#: controllers/user/start.py:304
+#: controllers/user/start.py:301
 msgid "Calculating takes a bit of time. We answer you when it will be ready"
 msgstr "Расчет занимает немного времени. Мы ответим вам, когда он будет готов"
 
-#: controllers/user/start.py:328
+#: controllers/user/start.py:325
 msgid ""
 "You're an astrologer aiming for maximum personalization of responses based "
 "on the user's astrological data. Communicate using \"you\", adopting a "
@@ -135,7 +135,7 @@ msgstr ""
 "Вы должны ответить в формате HTML. Используйте только ДОСТУПНЫЕ HTML-теги.\n"
 " ДОСТУПНЫЕ HTML-теги: <p>, <b>, <i>"
 
-#: controllers/user/start.py:335
+#: controllers/user/start.py:332
 msgid ""
 "Perform a detailed astrological analysis of the user's natal chart.  Don't "
 "forget to write in your answer  house numbers when responding.\n"
@@ -147,11 +147,11 @@ msgstr ""
 "Имя клиента {name}\n"
 "Данные: {astro_data}"
 
-#: controllers/user/start.py:383
+#: controllers/user/start.py:376
 msgid "Astrological analysis: {name} {zodiac}"
 msgstr "Астрологический анализ: {name} {zodiac}"
 
-#: controllers/user/start.py:390
+#: controllers/user/start.py:383
 msgid ""
 "We created your transcription of natala chart you can read it there <a "
 "href=\"{link}\">link</a>"
@@ -678,3 +678,12 @@ msgid_plural "{len_type} values are required, but {len_value} were given."
 msgstr[0] ""
 msgstr[1] ""
 msgstr[2] ""
+
+#~ msgid ""
+#~ "Welcome message.\n"
+#~ "\n"
+#~ "We do not share your data with third parties."
+#~ msgstr ""
+#~ "Приветственное сообщение.\n"
+#~ "\n"
+#~ "Мы не передаем ваши данные третьим лицам."
