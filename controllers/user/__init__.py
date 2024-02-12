@@ -13,6 +13,7 @@ def prepare_router() -> Router:
     user_router = Router()
 
     user_router.message.register(start.callback_start, Command(commands="start"))
+    user_router.message.register(start.handle_calculate, Command(commands="calculate"))
 
     user_router.callback_query.register(start.callback_start_calculation, lambda c: c.data == "/start_natal_calc")
     user_router.callback_query.register(start.callback_select_language, SetLocalesCallback.filter())

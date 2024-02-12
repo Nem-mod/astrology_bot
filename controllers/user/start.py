@@ -4,7 +4,9 @@ from pathlib import Path
 
 from aiogram import types, Bot
 from aiogram.fsm.context import FSMContext
+from aiogram.types import BotCommandScopeChat
 from aiogram.utils.keyboard import InlineKeyboardBuilder
+from aiogram_i18n.types import BotCommand
 from apscheduler_di import ContextSchedulerDecorator
 from kerykeion import AstrologicalSubject
 from aiogram.utils.i18n import gettext as _, FSMI18nMiddleware
@@ -68,7 +70,7 @@ async def callback_start_calculation(callback_query: types.CallbackQuery, state:
     if (
             not int(state_data["natal_count"]) == 0
             and not (crm_status == "trial"
-                 or crm_status == "subscription")
+                     or crm_status == "subscription")
     ):
         return
 
@@ -83,11 +85,38 @@ async def callback_start_calculation(callback_query: types.CallbackQuery, state:
     )
 
 
+async def handle_calculate(message: types.message.Message, state: FSMContext):
+    state_data = await state.get_data()
+    try:
+        crm_record = await ClickUpService.get_record(state_data["crm_record_id"])
+        crm_status = crm_record["status"]["status"].strip()
+    except:
+        return
+
+    if (
+            not int(state_data["natal_count"]) == 0
+            and not (crm_status == "trial"
+                     or crm_status == "subscription")
+    ):
+        return
+
+    keyboard_builder = InlineKeyboardBuilder()
+    keyboard_builder.button(
+        text=_("⬅️ Back"),
+        callback_data="/cancel_creating_natal_chart"
+    )
+    await message.answer(
+        text=_("What is your name?"),
+        reply_markup=keyboard_builder.as_markup()
+    )
+
+
 async def callback_select_language(
         callback_query: types.CallbackQuery,
         state: FSMContext,
         callback_data: SetLocalesCallback,
-        i18n_middleware: FSMI18nMiddleware
+        i18n_middleware: FSMI18nMiddleware,
+        bot: Bot
 ):
     await i18n_middleware.set_locale(state, callback_data.locale)
 
@@ -112,6 +141,13 @@ async def callback_select_language(
         )
     except Exception as err:
         print(err)
+
+    await bot.set_my_commands(
+        commands=[
+            BotCommand(command="/calculate", description=_("Calculate Natal chart")),
+        ],
+        scope=BotCommandScopeChat(chat_id=callback_query.from_user.id)
+    )
 
 
 async def form_not_completed(bot: Bot, chat_id: str, crm_record_id: str):
