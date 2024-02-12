@@ -41,5 +41,7 @@ def prepare_router() -> Router:
                                         lambda c: c.data == "/cancel_get_birthday")
     user_router.callback_query.register(back.callback_back_fom_birhttime,
                                         lambda c: c.data == "/cancel_get_birthtime")
+    user_router.callback_query.register(back.callback_back_from_birth_city,
+                                        lambda c: c.data == "/cancel_get_birth_city")
 
     return user_router

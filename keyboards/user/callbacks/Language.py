@@ -11,3 +11,4 @@ class AvailebleLocales(str, Enum):
 
 class SetLocalesCallback(CallbackData, prefix="loc"):
     locale: AvailebleLocales
+    crm_field_id: str

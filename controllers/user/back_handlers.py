@@ -45,3 +45,23 @@ async def callback_back_fom_birhttime(
         reply_markup=keyboard_builder.as_markup()
     )
     await state.set_state(NatalStates.get_birthday)
+
+
+async def callback_back_from_birth_city(callback_query: types.CallbackQuery, state: FSMContext):
+    keyboard_builder = InlineKeyboardBuilder()
+    keyboard_builder.button(
+        text=_("I dont know exact time"),
+        callback_data="/set_default_birthtime"
+    )
+    keyboard_builder.button(
+        text=_("⬅️ Back"),
+        callback_data="/cancel_get_birthtime"
+    )
+    keyboard_builder.adjust(1)
+    await callback_query.message.answer(
+        text=_("What time were you born? Type a time in 24 hours format HH:mm. For example: 23:20.  If you don't "
+               "know, select 'I don't know exact time' we will use default time."),
+        reply_markup=keyboard_builder.as_markup()
+    )
+
+    await state.set_state(NatalStates.get_birthtime)

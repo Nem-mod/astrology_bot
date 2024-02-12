@@ -24,12 +24,31 @@ from utils.create_table_chart import create_table_chart
 
 
 async def callback_start(message: types.message.Message, state: FSMContext) -> None:
-    record = await ClickUpService.add_to_crm(
-        telegram=message.from_user.username,
-        client_name=message.from_user.full_name
-    )
-
-    await state.update_data({"crm_record_id": record["id"]})
+    state_data = await state.get_data()
+    crm_id = state_data.get("crm_record_id")
+    if not crm_id == None:
+        return
+    try:
+        record = await ClickUpService.add_to_crm(
+            telegram=message.from_user.username,
+            client_name=f"{message.from_user.full_name} ID:{message.from_user.id}"
+        )
+        dt = datetime.now().timestamp() * 1000
+        await ClickUpService.update_task_custom_field(
+            task_id=record["id"],
+            field_id=CRM_CUSTOM_FIELDS.REGISTRATION_DATE,
+            value=dt
+        )
+        await ClickUpService.update_task_custom_field(
+            task_id=record["id"],
+            field_id=CRM_CUSTOM_FIELDS.NATAL_COUNT,
+            value="0"
+        )
+        await state.update_data({"natal_count": "0"})
+        await state.update_data({"crm_record_id": record["id"]})
+    except Exception as err:
+        print(err)
+        return
 
     buttons = get_locales_buttons()
     await message.answer(
@@ -39,8 +58,21 @@ async def callback_start(message: types.message.Message, state: FSMContext) -> N
 
 
 async def callback_start_calculation(callback_query: types.CallbackQuery, state: FSMContext):
-    keyboard_builder = InlineKeyboardBuilder()
+    state_data = await state.get_data()
+    try:
+        crm_record = await ClickUpService.get_record(state_data["crm_record_id"])
+        crm_status = crm_record["status"]["status"].strip()
+    except:
+        return
 
+    if (
+            not int(state_data["natal_count"]) == 0
+            and not (crm_status == "trial"
+                 or crm_status == "subscription")
+    ):
+        return
+
+    keyboard_builder = InlineKeyboardBuilder()
     keyboard_builder.button(
         text=_("⬅️ Back"),
         callback_data="/cancel_creating_natal_chart"
@@ -71,6 +103,17 @@ async def callback_select_language(
         reply_markup=keyboard_builder.as_markup()
     )
 
+    state_data = await state.get_data()
+    try:
+        await ClickUpService.update_task_custom_field(
+            task_id=state_data["crm_record_id"],
+            field_id=CRM_CUSTOM_FIELDS.LANGUAGE,
+            value=callback_data.crm_field_id
+        )
+    except Exception as err:
+        print(err)
+
+
 async def form_not_completed(bot: Bot, chat_id: str, crm_record_id: str):
     await bot.send_message(
         chat_id=chat_id,
@@ -86,7 +129,11 @@ async def handle_get_name(message: types.message.Message, state: FSMContext,
     await state.update_data({"name": message.text})
     state_data = await state.get_data()
     try:
-        await ClickUpService.update_task_name(task_id=state_data["crm_record_id"], value=f"{message.text} ID:{message.from_user.id}")
+        await ClickUpService.update_task_custom_field(
+            task_id=state_data["crm_record_id"],
+            field_id=CRM_CUSTOM_FIELDS.NATAL_NAME,
+            value=f"{message.text}"
+        )
         await ClickUpService.update_task_custom_status(task_id=state_data["crm_record_id"], value="filling form")
     except Exception as err:
         print(err)
@@ -172,15 +219,11 @@ async def handle_birthday(message: types.message.Message, state: FSMContext):
 
     state_data = await state.get_data()
     try:
-        value_options = {
-            "time": True
-        }
         timestamp = date.timestamp() * 1000
         await ClickUpService.update_task_custom_field(
             state_data["crm_record_id"],
             CRM_CUSTOM_FIELDS.BIRTHDAY,
-            timestamp,
-            value_options=value_options
+            timestamp
         )
 
     except Exception as err:
@@ -257,6 +300,9 @@ async def hande_get_birthtime(message: types.message.Message, state: FSMContext)
 
 async def handle_birth_city(message: types.message.Message, state: FSMContext):
     buttons = await get_geonames_buttons(message.text)
+    if not buttons:
+        await message.answer(_("No locations has found. Write location correctly"))
+        return
     await message.answer(
         text=_("<b>Confirm your place of birth:</b>"),
         reply_markup=buttons
@@ -286,6 +332,15 @@ async def callback_chose_city(callback_query: types.CallbackQuery, state: FSMCon
         is_anonymous=False
     )
 
+    state_data = await state.get_data()
+    try:
+        await ClickUpService.update_task_custom_field(
+            task_id=state_data["crm_record_id"],
+            field_id=CRM_CUSTOM_FIELDS.LOCATION,
+            value=callback_data.address)
+    except Exception as err:
+        print(err)
+
 
 async def handle_poll_answer(poll_answer: types.PollAnswer, state: FSMContext, bot: Bot,
                              apscheduler: ContextSchedulerDecorator):
@@ -308,7 +363,8 @@ async def handle_poll_answer(poll_answer: types.PollAnswer, state: FSMContext, b
         hour=int(state_data["birth_hour"]),
         city=state_data["birth_city"],
         lat=state_data["lat"],
-        lng=state_data["lng"]
+        lng=state_data["lng"],
+        geonames_username="artem.nechaev"
     )
 
     astro_data = create_table_chart(
@@ -372,7 +428,7 @@ async def handle_poll_answer(poll_answer: types.PollAnswer, state: FSMContext, b
         html_content += f'<img src="{image_th_path[0]["src"]}">'
 
     telegraph_response = await telegraph.create_page(
-        title=_("Astrological analysis: {name} {zodiac}").format(name=person.name, zodiac=person.first_house.emoji),
+        title=_("Astrological analysis: {name} {zodiac}").format(name=person.name, zodiac=person.sun.emoji),
         html_content=html_content
     )
 
@@ -394,12 +450,18 @@ async def handle_poll_answer(poll_answer: types.PollAnswer, state: FSMContext, b
             print(err)
 
     try:
+        natal_count = int(state_data["natal_count"]) + 1
         await ClickUpService.update_task_custom_field(
             task_id=state_data["crm_record_id"],
             field_id=CRM_CUSTOM_FIELDS.ARTICLE_LINK,
             value=telegraph_response["url"]
         )
 
+        await ClickUpService.update_task_custom_field(
+            task_id=state_data["crm_record_id"],
+            field_id=CRM_CUSTOM_FIELDS.NATAL_COUNT,
+            value=str(natal_count)
+        )
         topics_ids = []
 
         for id in poll_answer.option_ids:
@@ -417,112 +479,3 @@ async def handle_poll_answer(poll_answer: types.PollAnswer, state: FSMContext, b
         )
     except Exception as err:
         print(err)
-#
-# async def handle_get_birth_citydd(message: types.message.Message, state: FSMContext, bot: Bot) -> None:
-#     await message.answer("Немного подождите")
-#     state_data = await state.get_data()
-#     birth_city = message.text
-#
-#     person = AstrologicalSubject(
-#         name=state_data["name"],
-#         year=int(state_data["birth_year"]),
-#         month=int(state_data["birth_month"]),
-#         day=int(state_data["birth_day"]),
-#         hour=int(state_data["birth_hour"]),
-#         city=birth_city
-#     )
-#
-#     astro_data = create_table_chart(person.planets_list, person.first_house, person.tenth_house)
-#     openai_service = OpenAIService(
-#         api_key=config.openai.token
-#     )
-#
-#     system_prompt = _(
-#         "You're an astrologer aiming for maximum personalization of responses based on the user's astrological data. "
-#         "Communicate using \"you\", adopting a youthful style with elements of modern slang, but do so flexibly and "
-#         "appropriately. Inject humor and amusing descriptions where it's adequate and cannot be misinterpreted."
-#     )
-#
-#     query_message = _(
-#         "Perform a detailed astrological analysis of the user's natal chart.  Don't forget to write in your answer  "
-#         "house numbers when responding.\n"
-#         "Person: {name}\n"
-#         "Data: {astro_data}"
-#     ).format(name=person.name, astro_data=astro_data)
-#
-#     print(system_prompt)
-#     print(query_message)
-#
-#     query_completion = await openai_service.chat_completion(
-#         query=query_message,
-#         system_prompt=system_prompt,
-#     )
-#
-#     images = await openai_service.image_generation(
-#         prompt=f"Create image that reproduce information of Natal Chart\n {query_completion}"
-#     )
-#
-#     print(images)
-#
-#     telegraph = Telegraph()
-#     await telegraph.create_account(short_name='JettAstro')
-#
-#     html_content = ""
-#     for image in images:
-#         image_th_path = await telegraph.upload_file(image)
-#         html_content += f'<img src="{image_th_path[0]["src"]}">'
-#
-#     html_content += (
-#         f"<p>Here is your natal Chart</p>"
-#         f"<p>{query_completion}</p>"
-#     )
-#
-#     telegraph_response = await telegraph.create_page(
-#         title=f'{person.name} Описание',
-#         html_content=html_content
-#     )
-#
-#     print(telegraph_response['url'])
-#
-#     await message.answer(telegraph_response["url"])
-#
-#
-#     await state.set_state()
-
-
-# async def callback_calendar(callback_query: types.CallbackQuery, state: FSMContext, callback_data: CalendarCallback):
-#     selected, date = await SimpleCalendar().process_selection(callback_query, callback_data)
-#     current_datetime = datetime.now()
-#     if not selected or date > current_datetime - timedelta(days=365):
-#         return
-#     # await callback_query.message.answer(str(date))
-#     date: datetime = date
-#
-#     await state.update_data({
-#         "birth_year": date.year,
-#         "birth_month": date.month,
-#         "birth_day": date.day
-#     })
-#
-#     # await state.set_state(NatalStates.get_birth_hour)
-#     time_chooser = await SimpleTimeChooser.start_time_chooser(hour=12, minute=0)
-#     await callback_query.message.edit_text(text=_(
-#         "What time were you born? Choose a time. If you don't know, select "
-#         "<b>I don't know exact time</b> we will use default time."),
-#         reply_markup=time_chooser
-#     )
-#
-#
-# async def callback_time_chooser(callback_query: types.CallbackQuery, state: FSMContext,
-#                                 callback_data: TimeChooserCallback):
-#     selected, hour, minute = await SimpleTimeChooser().process_selection(callback_query, callback_data)
-#     if not selected:
-#         return
-#     await state.update_data({
-#         "birth_hour": hour,
-#         "birth_minute": minute,
-#     })
-#
-#     await callback_query.message.edit_text(_("Write the city and country of birth, for example: Nikolaev, Ukraine."))
-#     await state.set_state(NatalStates.get_birth_city)
-#

@@ -11,6 +11,7 @@ def get_locales_buttons() -> InlineKeyboardMarkup:
         text="🇺🇸English",
         callback_data=SetLocalesCallback(
             locale=AvailebleLocales.en,
+            crm_field_id="15416836-993c-44b5-88df-4c4f0cfade43"
         )
     )
 
@@ -18,6 +19,7 @@ def get_locales_buttons() -> InlineKeyboardMarkup:
         text="🇺🇦Українська",
         callback_data=SetLocalesCallback(
             locale=AvailebleLocales.uk,
+            crm_field_id="1462db7b-5d9b-4e5d-90a8-6409553ade58"
         )
     )
 
@@ -25,6 +27,8 @@ def get_locales_buttons() -> InlineKeyboardMarkup:
         text="🇷🇺Русский",
         callback_data=SetLocalesCallback(
             locale=AvailebleLocales.ru,
+            crm_field_id="8b72928b-e21a-4197-acec-e76b46ccb8e1"
+
         )
     )
 
