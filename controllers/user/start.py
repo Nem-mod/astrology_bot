@@ -140,7 +140,7 @@ async def callback_get_gender(
 
 
 async def handle_birthday(message: types.message.Message, state: FSMContext):
-    date_regex = r"^\d{2}\.\d{2}\.\d{4}$"
+    date_regex = r"^(0?[1-9]|[12]\d|3[01])\.(0?[1-9]|1[012])\.(\d{4})$"
     if not re.match(date_regex, message.text):
         await message.answer(_("Inputted value is invalid, correct format is DD.MM.YYYY"))
         return
@@ -175,7 +175,7 @@ async def handle_birthday(message: types.message.Message, state: FSMContext):
         value_options = {
             "time": True
         }
-        timestamp = date.timestamp()
+        timestamp = date.timestamp() * 1000
         await ClickUpService.update_task_custom_field(
             state_data["crm_record_id"],
             CRM_CUSTOM_FIELDS.BIRTHDAY,
@@ -219,7 +219,7 @@ async def callback_set_default_birthtime(callback_query: types.CallbackQuery, st
 
 
 async def hande_get_birthtime(message: types.message.Message, state: FSMContext):
-    date_regex = r"^\d{2}\:\d{2}$"
+    date_regex = r"^(?:[01]\d|2[0-3]):[0-5]\d$"
     if not re.match(date_regex, message.text):
         await message.answer(_("Inputted value is invalid, correct format is HH:MM"))
         return
