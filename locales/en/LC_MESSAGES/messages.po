@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2024-02-12 14:01+0200\n"
+"POT-Creation-Date: 2024-02-12 16:30+0200\n"
 "PO-Revision-Date: 2024-02-07 15:51+0200\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: en\n"
@@ -19,90 +19,101 @@ msgstr ""
 "Generated-By: Babel 2.14.0\n"
 
 #: controllers/user/back_handlers.py:17 controllers/user/back_handlers.py:40
-#: controllers/user/start.py:45 controllers/user/start.py:122
-#: controllers/user/start.py:162 controllers/user/start.py:199
-#: controllers/user/start.py:236
-#: keyboards/natal_chart/get_geonames_buttons.py:25
+#: controllers/user/back_handlers.py:57 controllers/user/start.py:79
+#: controllers/user/start.py:105 controllers/user/start.py:204
+#: controllers/user/start.py:244 controllers/user/start.py:277
+#: controllers/user/start.py:314
+#: keyboards/natal_chart/get_geonames_buttons.py:27
 #: keyboards/natal_chart/get_select_gender_buttons.py:27
 msgid "⬅️ Back"
 msgstr ""
 
-#: controllers/user/back_handlers.py:21 controllers/user/start.py:49
+#: controllers/user/back_handlers.py:21 controllers/user/start.py:83
+#: controllers/user/start.py:109
 msgid "What is your name?"
 msgstr ""
 
-#: controllers/user/back_handlers.py:30 controllers/user/start.py:97
+#: controllers/user/back_handlers.py:30 controllers/user/start.py:180
 msgid "Choose your gender"
 msgstr ""
 
-#: controllers/user/back_handlers.py:44 controllers/user/start.py:126
+#: controllers/user/back_handlers.py:44 controllers/user/start.py:208
 msgid ""
 "Enter the day, month and year of your birth in the format DD.MM.YYYY. For"
 " example: 31.12.1990"
 msgstr ""
 
-#: controllers/user/start.py:36
-msgid "Please choose your language 🌐"
-msgstr ""
-
-#: controllers/user/start.py:65
-msgid "Start calculation"
-msgstr ""
-
-#: controllers/user/start.py:69
-msgid ""
-"Hello, I'm the Virtual Astrologer. I'll create your natal chart and "
-"interpret it using birth data and the current positions of the planets in"
-" the sky. Then you can ask me anything you're curious about!"
-msgstr ""
-
-#: controllers/user/start.py:77
-msgid ""
-"Any difficulties? Do you ask your mother your birth time? Do you doubt "
-"AstroBot? Keep going, it will be interesting! Instead of mom, write "
-"@maginoid to get help"
-msgstr ""
-
-#: controllers/user/start.py:146
-msgid "Inputted value is invalid, correct format is DD.MM.YYYY"
-msgstr ""
-
-#: controllers/user/start.py:158 keyboards/natal_chart/SimpleTimeChooser.py:67
+#: controllers/user/back_handlers.py:53 controllers/user/start.py:240
+#: keyboards/natal_chart/SimpleTimeChooser.py:67
 msgid "I dont know exact time"
 msgstr ""
 
-#: controllers/user/start.py:167
+#: controllers/user/back_handlers.py:62 controllers/user/start.py:249
 msgid ""
 "What time were you born? Type a time in 24 hours format HH:mm. For "
 "example: 23:20.  If you don't know, select 'I don't know exact time' we "
 "will use default time."
 msgstr ""
 
-#: controllers/user/start.py:203 controllers/user/start.py:241
+#: controllers/user/start.py:57
+msgid "Please choose your language 🌐"
+msgstr ""
+
+#: controllers/user/start.py:126
+msgid "Start calculation"
+msgstr ""
+
+#: controllers/user/start.py:130
+msgid ""
+"Hello, I'm the Virtual Astrologer. I'll create your natal chart and "
+"interpret it using birth data and the current positions of the planets in"
+" the sky. Then you can ask me anything you're curious about!"
+msgstr ""
+
+#: controllers/user/start.py:147
+msgid "Calculate Natal chart"
+msgstr ""
+
+#: controllers/user/start.py:156
+msgid ""
+"Any difficulties? Do you ask your mother your birth time? Do you doubt "
+"AstroBot? Keep going, it will be interesting! Instead of mom, write "
+"@maginoid to get help"
+msgstr ""
+
+#: controllers/user/start.py:228
+msgid "Inputted value is invalid, correct format is DD.MM.YYYY"
+msgstr ""
+
+#: controllers/user/start.py:281 controllers/user/start.py:319
 msgid "Write the city and country of birth, for example: Nikolaev, Ukraine."
 msgstr ""
 
-#: controllers/user/start.py:225
+#: controllers/user/start.py:303
 msgid "Inputted value is invalid, correct format is HH:MM"
 msgstr ""
 
-#: controllers/user/start.py:262
+#: controllers/user/start.py:340
+msgid "No locations has found. Write location correctly"
+msgstr ""
+
+#: controllers/user/start.py:343
 msgid "<b>Confirm your place of birth:</b>"
 msgstr ""
 
-#: controllers/user/start.py:278
+#: controllers/user/start.py:359
 msgid "You location {location_name} confirmed"
 msgstr ""
 
-#: controllers/user/start.py:286
+#: controllers/user/start.py:367
 msgid "Choose topics that interest you (at least one):"
 msgstr ""
 
-#: controllers/user/start.py:301
+#: controllers/user/start.py:391
 msgid "Calculating takes a bit of time. We answer you when it will be ready"
 msgstr ""
 
-#: controllers/user/start.py:325
+#: controllers/user/start.py:416
 msgid ""
 "You're an astrologer aiming for maximum personalization of responses "
 "based on the user's astrological data. Communicate using \"you\", "
@@ -114,7 +125,7 @@ msgid ""
 " AVAILABLE HTML tags are <p>, <b>, <i>"
 msgstr ""
 
-#: controllers/user/start.py:332
+#: controllers/user/start.py:423
 msgid ""
 "Perform a detailed astrological analysis of the user's natal chart.  "
 "Don't forget to write in your answer  house numbers when responding.\n"
@@ -122,11 +133,11 @@ msgid ""
 "Data: {astro_data}"
 msgstr ""
 
-#: controllers/user/start.py:376
+#: controllers/user/start.py:467
 msgid "Astrological analysis: {name} {zodiac}"
 msgstr ""
 
-#: controllers/user/start.py:383
+#: controllers/user/start.py:474
 msgid ""
 "We created your transcription of natala chart you can read it there <a "
 "href=\"{link}\">link</a>"

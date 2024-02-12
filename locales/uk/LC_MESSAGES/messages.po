@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2024-02-12 14:01+0200\n"
-"PO-Revision-Date: 2024-02-12 14:03+0200\n"
+"POT-Creation-Date: 2024-02-12 16:30+0200\n"
+"PO-Revision-Date: 2024-02-12 16:32+0200\n"
 "Last-Translator: \n"
 "Language-Team: uk <LL@li.org>\n"
 "Language: uk\n"
@@ -21,23 +21,25 @@ msgstr ""
 "X-Generator: Poedit 3.4.2\n"
 
 #: controllers/user/back_handlers.py:17 controllers/user/back_handlers.py:40
-#: controllers/user/start.py:45 controllers/user/start.py:122
-#: controllers/user/start.py:162 controllers/user/start.py:199
-#: controllers/user/start.py:236
-#: keyboards/natal_chart/get_geonames_buttons.py:25
+#: controllers/user/back_handlers.py:57 controllers/user/start.py:79
+#: controllers/user/start.py:105 controllers/user/start.py:204
+#: controllers/user/start.py:244 controllers/user/start.py:277
+#: controllers/user/start.py:314
+#: keyboards/natal_chart/get_geonames_buttons.py:27
 #: keyboards/natal_chart/get_select_gender_buttons.py:27
 msgid "⬅️ Back"
 msgstr "⬅️ Назад"
 
-#: controllers/user/back_handlers.py:21 controllers/user/start.py:49
+#: controllers/user/back_handlers.py:21 controllers/user/start.py:83
+#: controllers/user/start.py:109
 msgid "What is your name?"
 msgstr "Як вас звати?"
 
-#: controllers/user/back_handlers.py:30 controllers/user/start.py:97
+#: controllers/user/back_handlers.py:30 controllers/user/start.py:180
 msgid "Choose your gender"
 msgstr "Виберіть свою стать"
 
-#: controllers/user/back_handlers.py:44 controllers/user/start.py:126
+#: controllers/user/back_handlers.py:44 controllers/user/start.py:208
 msgid ""
 "Enter the day, month and year of your birth in the format DD.MM.YYYY. For "
 "example: 31.12.1990"
@@ -45,15 +47,30 @@ msgstr ""
 "Введіть день, місяць і рік свого народження у форматі ДД.ММ.РРРР. "
 "Наприклад: 31.12.1990"
 
-#: controllers/user/start.py:36
+#: controllers/user/back_handlers.py:53 controllers/user/start.py:240
+#: keyboards/natal_chart/SimpleTimeChooser.py:67
+msgid "I dont know exact time"
+msgstr "Я не знаю точного часу"
+
+#: controllers/user/back_handlers.py:62 controllers/user/start.py:249
+msgid ""
+"What time were you born? Type a time in 24 hours format HH:mm. For "
+"example: 23:20.  If you don't know, select 'I don't know exact time' we "
+"will use default time."
+msgstr ""
+"О котрій годині ти народився? Введіть час у 24-годинному форматі ГГ:хв. "
+"Наприклад: 23:20. Якщо ви не знаєте, виберіть «Я не знаю точного часу», "
+"ми будемо використовувати час за замовчуванням."
+
+#: controllers/user/start.py:57
 msgid "Please choose your language 🌐"
 msgstr "Виберіть мову 🌐"
 
-#: controllers/user/start.py:65
+#: controllers/user/start.py:126
 msgid "Start calculation"
 msgstr "Почати розрахунок"
 
-#: controllers/user/start.py:69
+#: controllers/user/start.py:130
 msgid ""
 "Hello, I'm the Virtual Astrologer. I'll create your natal chart and "
 "interpret it using birth data and the current positions of the planets in "
@@ -63,65 +80,59 @@ msgstr ""
 "використовуючи дані про народження та розташування планет на небі в цей "
 "момент. Після цього ти можеш запитати мене про все, що тебе цікавить!"
 
-#: controllers/user/start.py:77
+#: controllers/user/start.py:147
+msgid "Calculate Natal chart"
+msgstr "Розрахувати натальну карту"
+
+#: controllers/user/start.py:156
 msgid ""
 "Any difficulties? Do you ask your mother your birth time? Do you doubt "
 "AstroBot? Keep going, it will be interesting! Instead of mom, write "
 "@maginoid to get help"
 msgstr ""
-"Якісь труднощі? Ви питаєте у матері час свого народження? Ви сумніваєтеся в "
-"AstroBot? Продовжуйте, буде цікаво! Замість мама напишіть @maginoid, щоб "
-"отримати допомогу"
+"Якісь труднощі? Ви питаєте у матері час свого народження? Ви сумніваєтеся "
+"в AstroBot? Продовжуйте, буде цікаво! Замість мама напишіть @maginoid, "
+"щоб отримати допомогу"
 
-#: controllers/user/start.py:146
+#: controllers/user/start.py:228
 msgid "Inputted value is invalid, correct format is DD.MM.YYYY"
 msgstr "Введене значення недійсне, правильний формат – ДД.ММ.РРРР"
 
-#: controllers/user/start.py:158 keyboards/natal_chart/SimpleTimeChooser.py:67
-msgid "I dont know exact time"
-msgstr "Я не знаю точного часу"
-
-#: controllers/user/start.py:167
-msgid ""
-"What time were you born? Type a time in 24 hours format HH:mm. For example: "
-"23:20.  If you don't know, select 'I don't know exact time' we will use "
-"default time."
-msgstr ""
-"О котрій годині ти народився? Введіть час у 24-годинному форматі ГГ:хв. "
-"Наприклад: 23:20. Якщо ви не знаєте, виберіть «Я не знаю точного часу», ми "
-"будемо використовувати час за замовчуванням."
-
-#: controllers/user/start.py:203 controllers/user/start.py:241
+#: controllers/user/start.py:281 controllers/user/start.py:319
 msgid "Write the city and country of birth, for example: Nikolaev, Ukraine."
 msgstr "Напишіть місто та країну народження, наприклад: Миколаїв, Україна."
 
-#: controllers/user/start.py:225
+#: controllers/user/start.py:303
 msgid "Inputted value is invalid, correct format is HH:MM"
 msgstr "Введене значення недійсне, правильний формат ГГ:ХХ"
 
-#: controllers/user/start.py:262
+#: controllers/user/start.py:340
+msgid "No locations has found. Write location correctly"
+msgstr "Місцезнаходження не знайдено. Напишіть місце народження правильно"
+
+#: controllers/user/start.py:343
 msgid "<b>Confirm your place of birth:</b>"
 msgstr "<b>Підтвердьте своє місце народження:</b>"
 
-#: controllers/user/start.py:278
+#: controllers/user/start.py:359
 msgid "You location {location_name} confirmed"
 msgstr "Ваше місцезнаходження {location_name} підтверджено"
 
-#: controllers/user/start.py:286
+#: controllers/user/start.py:367
 msgid "Choose topics that interest you (at least one):"
 msgstr "Виберіть теми, які вас цікавлять (хоча б одну):"
 
-#: controllers/user/start.py:301
+#: controllers/user/start.py:391
 msgid "Calculating takes a bit of time. We answer you when it will be ready"
 msgstr "Розрахунок займає трохи часу. Відповідаємо, коли буде готово"
 
-#: controllers/user/start.py:325
+#: controllers/user/start.py:416
 msgid ""
-"You're an astrologer aiming for maximum personalization of responses based "
-"on the user's astrological data. Communicate using \"you\", adopting a "
-"youthful style with elements of modern slang, but do so flexibly and "
-"appropriately. Inject humor and amusing descriptions where it's adequate "
-"and cannot be misinterpreted.\n"
+"You're an astrologer aiming for maximum personalization of responses "
+"based on the user's astrological data. Communicate using \"you\", "
+"adopting a youthful style with elements of modern slang, but do so "
+"flexibly and appropriately. Inject humor and amusing descriptions where "
+"it's adequate and cannot be misinterpreted.\n"
 "\n"
 "You must response in HTML format. Use only AVAILEBLE HTML tags\n"
 " AVAILABLE HTML tags are <p>, <b>, <i>"
@@ -136,10 +147,10 @@ msgstr ""
 "HTML\n"
 " ДОСТУПНІ теги HTML: <p>, <b>, <i>"
 
-#: controllers/user/start.py:332
+#: controllers/user/start.py:423
 msgid ""
-"Perform a detailed astrological analysis of the user's natal chart.  Don't "
-"forget to write in your answer  house numbers when responding.\n"
+"Perform a detailed astrological analysis of the user's natal chart.  "
+"Don't forget to write in your answer  house numbers when responding.\n"
 "Client: {name}\n"
 "Data: {astro_data}"
 msgstr ""
@@ -148,11 +159,11 @@ msgstr ""
 "Клієнт: {name}\n"
 "Дані: {astro_data}"
 
-#: controllers/user/start.py:376
+#: controllers/user/start.py:467
 msgid "Astrological analysis: {name} {zodiac}"
 msgstr "Астрологічний аналіз: {name} {zodiac}"
 
-#: controllers/user/start.py:383
+#: controllers/user/start.py:474
 msgid ""
 "We created your transcription of natala chart you can read it there <a "
 "href=\"{link}\">link</a>"
@@ -175,14 +186,14 @@ msgstr "Жінка"
 #: utils/TelegraphHelper.py:6
 msgid ""
 "<p><i>A detailed analysis of your natal chart and an in-depth "
-"interpretation of your personality using artificial intelligence trained on "
-"the best practices of Western astrology. Made with <a href=\"https://t.me/"
-"astrolog_ai_bot\"> AstroBot</a>.</i></p>"
+"interpretation of your personality using artificial intelligence trained "
+"on the best practices of Western astrology. Made with <a href=\"https://t."
+"me/astrolog_ai_bot\"> AstroBot</a>.</i></p>"
 msgstr ""
 "<p><i>Детальний аналіз вашої натальної карти та поглиблена інтерпретація "
 "вашої особистості за допомогою штучного інтелекту, навченого найкращим "
-"практикам західної астрології. Створено за допомогою <a href=\"https://t.me/"
-"astrolog_ai_bot\"> AstroBot</a>.</i></p>"
+"практикам західної астрології. Створено за допомогою <a href=\"https://t."
+"me/astrolog_ai_bot\"> AstroBot</a>.</i></p>"
 
 #: utils/TelegraphHelper.py:12
 msgid "Strengths & Weaknesses"
@@ -246,8 +257,8 @@ msgid ""
 "question is based on the analysis of the natal chart."
 msgstr ""
 "Яка місія користувача? Як Користувач може принести користь людству? "
-"Відповідь має містити не більше 1500 символів. Додайте емодзі. Відповідь на "
-"це питання ґрунтується на аналізі натальної карти."
+"Відповідь має містити не більше 1500 символів. Додайте емодзі. Відповідь "
+"на це питання ґрунтується на аналізі натальної карти."
 
 #: utils/TelegraphHelper.py:53
 msgid ""
@@ -265,23 +276,24 @@ msgid ""
 "points. The answer must contain no more than 1000 characters. Add emoji. "
 "The answer to this question is based on the analysis of the natal chart."
 msgstr ""
-"Як Користувач може досягти гармонії та балансу в житті? Виділіть 5 ключових "
-"моментів. Відповідь має містити не більше 1000 символів. Додайте емодзі. "
-"Відповідь на це питання ґрунтується на аналізі натальної карти."
+"Як Користувач може досягти гармонії та балансу в житті? Виділіть 5 "
+"ключових моментів. Відповідь має містити не більше 1000 символів. Додайте "
+"емодзі. Відповідь на це питання ґрунтується на аналізі натальної карти."
 
 #: utils/TelegraphHelper.py:58
 msgid ""
 "How can the User achieve financial well-being? Describe one of the most "
 "suitable paths for the User. The answer must contain no more than 2000 "
-"characters. Add emoji. The answer to this question is based on the analysis "
-"of the natal chart. Give some tips for achieving financial prosperity. Give "
-"some tips for financial literacy. Consider what financial mistakes a user "
-"can make.  Advise what books to read for this purpose."
+"characters. Add emoji. The answer to this question is based on the "
+"analysis of the natal chart. Give some tips for achieving financial "
+"prosperity. Give some tips for financial literacy. Consider what "
+"financial mistakes a user can make.  Advise what books to read for this "
+"purpose."
 msgstr ""
 "Як Користувач може досягти фінансового благополуччя? Опишіть один із "
-"найбільш прийнятних шляхів для Користувача. Відповідь має містити не більше "
-"2000 символів. Додайте емодзі. Відповідь на це питання ґрунтується на "
-"аналізі натальної карти. Дайте кілька порад для досягнення фінансового "
+"найбільш прийнятних шляхів для Користувача. Відповідь має містити не "
+"більше 2000 символів. Додайте емодзі. Відповідь на це питання ґрунтується "
+"на аналізі натальної карти. Дайте кілька порад для досягнення фінансового "
 "процвітання. Дайте кілька порад щодо фінансової грамотності. Розглянемо, "
 "які фінансові помилки може зробити користувач. Порадьте, які книги для "
 "цього прочитати."
@@ -309,8 +321,8 @@ msgid ""
 "- microblogging (for example Twitter, but not only)\n"
 "Give Recommendations for blog promotion.\n"
 " Indicate Which social networks are better suited.\n"
-"The answer should be no more than 1500 characters. Add an emoji. The answer "
-"to this question is based on analyzing a natal chart.\n"
+"The answer should be no more than 1500 characters. Add an emoji. The "
+"answer to this question is based on analyzing a natal chart.\n"
 msgstr ""
 "Як користувач повинен виражати себе в блозі?\n"
 "\n"
@@ -333,27 +345,27 @@ msgstr ""
 "- мікроблоги (наприклад Twitter, але не тільки)\n"
 "Дайте рекомендації щодо просування блогу.\n"
 "  Вкажіть, які соціальні мережі краще підходять.\n"
-"Відповідь має бути не більше 1500 символів. Додайте емодзі. Відповідь на це "
-"питання ґрунтується на аналізі натальної карти.\n"
+"Відповідь має бути не більше 1500 символів. Додайте емодзі. Відповідь на "
+"це питання ґрунтується на аналізі натальної карти.\n"
 
 #: utils/TelegraphHelper.py:85
 msgid ""
 "Write the User's success story based on the data from their natal chart. "
-"The answer must contain no more than 2000 characters. Add emoji. The answer "
-"to this question is based on all previous answers."
+"The answer must contain no more than 2000 characters. Add emoji. The "
+"answer to this question is based on all previous answers."
 msgstr ""
-"Напишіть історію успіху користувача на основі даних з його натальної карти. "
-"Відповідь має містити не більше 2000 символів. Додайте емодзі. Відповідь на "
-"це запитання базується на всіх попередніх відповідях."
+"Напишіть історію успіху користувача на основі даних з його натальної "
+"карти. Відповідь має містити не більше 2000 символів. Додайте емодзі. "
+"Відповідь на це запитання базується на всіх попередніх відповідях."
 
 #: utils/TelegraphHelper.py:90
 msgid ""
-"<h3>Strengths & Weaknesses</h3><blockquote dir=\"auto\">What sets you apart "
-"from others, what is your superpower? And what are the growth points?</"
-"blockquote>"
+"<h3>Strengths & Weaknesses</h3><blockquote dir=\"auto\">What sets you "
+"apart from others, what is your superpower? And what are the growth "
+"points?</blockquote>"
 msgstr ""
-"<h3>Сильні та слабкі сторони</h3><blockquote dir=\"auto\">Що відрізняє вас "
-"від інших, яка ваша суперсила? А які точки росту?</blockquote>"
+"<h3>Сильні та слабкі сторони</h3><blockquote dir=\"auto\">Що відрізняє "
+"вас від інших, яка ваша суперсила? А які точки росту?</blockquote>"
 
 #: utils/TelegraphHelper.py:93
 msgid ""
@@ -373,11 +385,11 @@ msgstr ""
 
 #: utils/TelegraphHelper.py:97
 msgid ""
-"<h3>Relationships</h3><blockquote dir=\"auto\">Which partner can you build "
-"a harmonious relationship with?</blockquote>"
+"<h3>Relationships</h3><blockquote dir=\"auto\">Which partner can you "
+"build a harmonious relationship with?</blockquote>"
 msgstr ""
-"<h3>Стосунки</h3><blockquote dir=\"auto\">З яким партнером можна побудувати "
-"гармонійні стосунки?</blockquote>"
+"<h3>Стосунки</h3><blockquote dir=\"auto\">З яким партнером можна "
+"побудувати гармонійні стосунки?</blockquote>"
 
 #: utils/TelegraphHelper.py:99
 msgid ""
@@ -397,11 +409,11 @@ msgstr ""
 
 #: utils/TelegraphHelper.py:103
 msgid ""
-"<h3>Blog Topics</h3><blockquote dir=\"auto\">Recommendations and ideas for "
-"a blog.</blockquote>"
+"<h3>Blog Topics</h3><blockquote dir=\"auto\">Recommendations and ideas "
+"for a blog.</blockquote>"
 msgstr ""
-"<h3>Теми блогу</h3><blockquote dir=\"auto\">Рекомендації та ідеї для блогу."
-"</blockquote>"
+"<h3>Теми блогу</h3><blockquote dir=\"auto\">Рекомендації та ідеї для "
+"блогу.</blockquote>"
 
 #: utils/TelegraphHelper.py:105
 msgid ""
