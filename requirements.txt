@@ -12,6 +12,8 @@ redis~=5.0.1
 aioredis~=2.0.1
 apscheduler-di~=0.1.0
 geocoder~=1.38.1
+motor~=3.3.2
+
 
 cffi~=1.16.0
 defusedxml~=0.7.1

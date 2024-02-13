@@ -7,7 +7,6 @@ import base64  # for decoding images if recieved in the reply
 from PIL import Image  # pillow, for processing image types
 
 
-
 class OpenAIService:
     def __init__(self, api_key: str):
         self._client = AsyncOpenAI(api_key=api_key)
@@ -36,14 +35,17 @@ class OpenAIService:
     async def image_generation(self,
                                prompt: str,
                                model: str = "dall-e-3",
-                               size: Literal[
-                                   "256x256", "512x512", "1024x1024", "1792x1024", "1024x1792"] = "1024x1024",
-                               source_dir: str = "./sources"):
+                               size: Literal["256x256", "512x512", "1024x1024", "1792x1024", "1024x1792"] = "1024x1024",
+                               extra_query: str = None,
+                               source_dir: str = "./sources"
+                               ):
+
         images_response = await self._client.images.generate(
             model=model,
             n=1,
             size=size,
             prompt=prompt,
+            extra_query=extra_query,
             response_format="b64_json"
         )
         images_dt = datetime.utcfromtimestamp(images_response.created)
@@ -66,5 +68,13 @@ class OpenAIService:
                 images_filenames.append(f"{source_dir}/{img_filename}_{i}.png")
         else:
             print("No image data was obtained. Maybe bad code?")
+
+        for image in images:
+            try:
+                fp = Path(image)
+                fp.unlink()
+            except Exception as err:
+                print(err)
+
 
         return images_filenames

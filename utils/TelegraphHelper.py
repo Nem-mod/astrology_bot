@@ -1,6 +1,16 @@
 from aiogram.utils.i18n import gettext as _
 class TelegraphHelper():
 
+    TOPICS_CRM_IDS = [
+        "0411267e-2c8b-47d1-b83b-e4ce0bb85f98",
+        "c3f73cc7-bf15-48ad-977e-0743e31a5d0b",
+        "8322da70-d890-45dd-b81b-2874344e69b6",
+        "24f62048-cea4-4bd3-b7f4-4e533ef03a3a",
+        "02bbd3ea-bdd7-490e-aef2-cfbe02314f04",
+        "ddda42ae-d483-49dd-82bd-b195b62496a4",
+        "e8df8705-2383-4721-8ad4-d91d02c1e785",
+        "4234107c-4402-45d8-9604-0f140c5b3ac8",
+    ]
     def __init__(self):
 
         self.HEADER = _(
@@ -28,17 +38,6 @@ class TelegraphHelper():
             "sources/natal_chart/pre_generated_images/finance_0.png",
             "sources/natal_chart/pre_generated_images/blog_0.png",
             "sources/natal_chart/pre_generated_images/success_history_0.png"
-        ]
-
-        self.TOPICS_CRM_IDS = [
-            "0411267e-2c8b-47d1-b83b-e4ce0bb85f98",
-            "c3f73cc7-bf15-48ad-977e-0743e31a5d0b",
-            "8322da70-d890-45dd-b81b-2874344e69b6",
-            "24f62048-cea4-4bd3-b7f4-4e533ef03a3a",
-            "02bbd3ea-bdd7-490e-aef2-cfbe02314f04",
-            "ddda42ae-d483-49dd-82bd-b195b62496a4",
-            "e8df8705-2383-4721-8ad4-d91d02c1e785",
-            "4234107c-4402-45d8-9604-0f140c5b3ac8",
         ]
 
         self.TOPICS_PROMPTS = [
