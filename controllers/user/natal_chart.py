@@ -8,6 +8,7 @@ from apscheduler_di import ContextSchedulerDecorator
 from aiogram.utils.i18n import gettext as _
 
 from controllers.user.utils import create_telegraph_article, form_not_completed
+from db import MongoDbService
 from keyboards.natal_chart import get_geonames_buttons, get_select_gender_buttons
 from keyboards.natal_chart.callbacks import GeoNameCallback, GendersCallback
 from keyboards.user import get_proceed_buttons
@@ -26,8 +27,14 @@ async def callback_start_calculation(callback_query: types.CallbackQuery, state:
     except:
         return
 
+    try:
+        mongo_client = MongoDbService()
+        user = await mongo_client.get_user(callback_query.from_user.id)
+    except:
+        return
+
     if (
-            not int(state_data["natal_count"]) == 0
+            not int(user["natal_count"]) == 0
             and not (crm_status == "trial"
                      or crm_status == "subscription")
     ):
@@ -290,7 +297,6 @@ async def callback_chose_city(callback_query: types.CallbackQuery, state: FSMCon
 async def handle_poll_answer(poll_answer: types.PollAnswer, state: FSMContext, bot: Bot,
                              apscheduler: ContextSchedulerDecorator):
     state_data = await state.get_data()
-    print(state_data["scheduler_job_id"], state_data)
     apscheduler.remove_job(state_data["scheduler_job_id"])
     try:
         await ClickUpService.update_task_custom_status(task_id=state_data["crm_record_id"], value="form completed")
@@ -303,7 +309,7 @@ async def handle_poll_answer(poll_answer: types.PollAnswer, state: FSMContext, b
     await bot.send_message(text=_("Calculating the natal chart. It will take 2 min..."),
                            chat_id=state_data["chat_id"])
 
-    telegraph_link = create_telegraph_article(state_data, poll_answer)
+    telegraph_link, natal_summary = create_telegraph_article(state_data, poll_answer)
 
     await bot.send_message(
         text=_("Your analysis is ready. Click the link below👇\n{link}")
@@ -341,6 +347,23 @@ async def handle_poll_answer(poll_answer: types.PollAnswer, state: FSMContext, b
         await ClickUpService.update_task_custom_status(
             task_id=state_data["crm_record_id"],
             value="article ready"
+        )
+
+    except Exception as err:
+        print(err)
+
+    try:
+        mongo_client = MongoDbService()
+        await mongo_client.update_user(
+            user_id=state_data["chat_id"],
+            data={
+                "$inc": {
+                    "natal_count": 1
+                },
+                "$set": {
+                    "natal_summary": natal_summary
+                }
+            }
         )
 
     except Exception as err:

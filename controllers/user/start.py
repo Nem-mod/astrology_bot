@@ -90,8 +90,10 @@ async def callback_select_language(
         await mongo_client.update_user(
             user_id=callback_query.from_user.id,
             data={
-                "locale": callback_data.locale
-            }
+                "$set": {
+                    "locale": callback_data.locale
+                }
+            },
         )
 
     except Exception as err:

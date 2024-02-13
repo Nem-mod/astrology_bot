@@ -33,6 +33,9 @@ class ClickUp:
     token: str
     crm_id: str
 
+@dataclass
+class Database:
+    mongo_url: str
 
 @dataclass
 class Config:
@@ -41,6 +44,7 @@ class Config:
     openai: OpenAI
     redis: RedisStorage
     clickup: ClickUp
+    database: Database
 
 
 def load_config(path: str = None) -> Config:
@@ -68,5 +72,8 @@ def load_config(path: str = None) -> Config:
         clickup=ClickUp(
             token=env.str('CLICK_UP_TOKEN'),
             crm_id=env.str('CLICK_UP_CRM_ID')
+        ),
+        database=Database(
+            mongo_url=env.str('MONGODB_URL')
         )
     )

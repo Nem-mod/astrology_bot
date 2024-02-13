@@ -20,7 +20,7 @@ async def form_not_completed(bot: Bot, chat_id: str, crm_record_id: str):
     await ClickUpService.update_task_custom_status(task_id=crm_record_id, value="form not completed")
 
 
-async def create_telegraph_article(state_data: dict, poll_answer: types.PollAnswer) -> str:
+async def create_telegraph_article(state_data: dict, poll_answer: types.PollAnswer) -> tuple[str, str]:
 
     person = AstrologicalSubject(
         name=state_data["name"],
@@ -59,7 +59,7 @@ async def create_telegraph_article(state_data: dict, poll_answer: types.PollAnsw
         "Data: {astro_data}"
     ).format(name=person.name, astro_data=astro_data)
 
-    entrance_completion, messages = await openai_service.chat_completion(
+    natal_summary, messages = await openai_service.chat_completion(
         query=query_message,
         system_prompt=system_prompt,
     )
@@ -91,7 +91,7 @@ async def create_telegraph_article(state_data: dict, poll_answer: types.PollAnsw
     images = await openai_service.image_generation(
         prompt=f"Create an image of the user based on the personality description from the natal chart. The image "
                f"format is 9 by width, 16 by height.",
-        extra_query=f"Person's gender: {state_data['gender']}\n Astrological analysis: {entrance_completion}"
+        extra_query=f"Person's gender: {state_data['gender']}\n Astrological analysis: {natal_summary}"
     )
 
     for image in images:
@@ -110,4 +110,4 @@ async def create_telegraph_article(state_data: dict, poll_answer: types.PollAnsw
         except Exception as err:
             print(err)
 
-    return telegraph_response["url"]
+    return telegraph_response["url"], natal_summary

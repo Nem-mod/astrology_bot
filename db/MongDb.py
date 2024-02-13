@@ -8,8 +8,7 @@ uri = ""
 
 class MongoDbService:
     def __init__(self):
-        self._client = AsyncIOMotorClient(
-            "mongodb://mongo:ChC34B66Dh-h3H1f4GA4d6h6Dd4FgbaB@viaduct.proxy.rlwy.net:10686")
+        self._client = AsyncIOMotorClient()
         self._db = self._client["astro_bot"]
         self._user_collection = self._db["users"]
 
@@ -24,9 +23,7 @@ class MongoDbService:
     async def update_user(self, user_id: int, data: dict):
         user = await self._user_collection.update_one(
             filter={"user_id": user_id},
-            update={
-                "$set": data
-            }
+            update=data
         )
         return user
 
