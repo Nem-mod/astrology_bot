@@ -29,7 +29,7 @@ async def check_natal_chart_is_available(state_data, user_id) -> bool:
         return False
 
     if (
-            int(user["natal_chart_left"]) == 0
+            int(user["natal_chart_left"]) <= 0
             and not (crm_status == "trial"
                 or crm_status == "subscription")
     ):

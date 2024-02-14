@@ -18,7 +18,7 @@ async def check_assistant_chat_is_available(state_data, user) -> bool:
         return False
 
     if (
-            int(user["assistant_questions_left"]) == 0
+            int(user["assistant_questions_left"]) <= 0
             and not (crm_status == "trial"
                      or crm_status == "subscription")
     ):
