@@ -366,7 +366,7 @@ async def handle_poll_answer(poll_answer: types.PollAnswer, state: FSMContext, b
             user_id=state_data["chat_id"],
             data={
                 "$inc": {
-                    "natal_count": -1
+                    "natal_chart_left": -1
                 },
                 "$set": {
                     "natal_summary": natal_summary
