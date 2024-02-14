@@ -13,7 +13,7 @@ def get_proceed_buttons() -> InlineKeyboardMarkup:
     )
 
     keyboard_builder.button(
-        text="🤖 Free chat with the Virtual Astrologer",
+        text=_("🤖 Free chat with the Virtual Astrologer"),
         callback_data="/chat_with_va"
     )
 

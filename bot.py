@@ -39,6 +39,7 @@ async def on_shut_down(bot: Bot):
 
 def init_routers(dp: Dispatcher):
     dp.include_router(controllers.user_router.prepare_router())
+    dp.include_router(controllers.va_router.prepare_router())
 
 
 def setup_middlewares(dp: Dispatcher, scheduler):

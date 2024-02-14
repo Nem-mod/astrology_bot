@@ -2,9 +2,10 @@ from pathlib import Path
 
 from aiogram import types, Bot
 from kerykeion import AstrologicalSubject
-from telegraph import Telegraph
 
 from aiogram.utils.i18n import gettext as _, FSMI18nMiddleware
+from telegraph.aio import Telegraph
+
 from data.config import config
 from services import OpenAIService, ClickUpService
 from utils import TelegraphHelper
@@ -48,8 +49,6 @@ async def create_telegraph_article(state_data: dict, poll_answer: types.PollAnsw
         "You're an astrologer aiming for maximum personalization of responses based on the user's astrological data. "
         "Communicate using \"you\", adopting a youthful style with elements of modern slang, but do so flexibly and "
         "appropriately. Inject humor and amusing descriptions where it's adequate and cannot be misinterpreted.\n\n"
-        "You must response in HTML format. Use only AVAILEBLE HTML tags\n AVAILABLE HTML tags are <p>, <b>, "
-        "<i>. Do not use list tags."
     )
 
     query_message = _(
@@ -86,17 +85,21 @@ async def create_telegraph_article(state_data: dict, poll_answer: types.PollAnsw
         except:
             pass
         html_content += telegraph_helper.BLOCKQUOTE_LIST[id]
-        html_content += (temp_comp)
+        html_content += f"<p>{temp_comp}</p>"
 
-    images = await openai_service.image_generation(
-        prompt=f"Create an image of the user based on the personality description from the natal chart. The image "
-               f"format is 9 by width, 16 by height.",
-        extra_query=f"Person's gender: {state_data['gender']}\n Astrological analysis: {natal_summary}"
-    )
+    try:
+        images = await openai_service.image_generation(
+            prompt=f"Create an image of the user based on the personality description from the natal chart. The image "
+                   f"format is 9 by width, 16 by height.\n\n"
+                   f"Person's gender: {state_data['gender']}\n Astrological analysis: {natal_summary[:100]}"
+        )
 
-    for image in images:
-        image_th_path = await telegraph.upload_file(image)
-        html_content += f'<img src="{image_th_path[0]["src"]}">'
+        for image in images:
+            image_th_path = await telegraph.upload_file(image)
+            html_content += f'<img src="{image_th_path[0]["src"]}">'
+    except Exception as err:
+        images = []
+        print(err)
 
     telegraph_response = await telegraph.create_page(
         title=_("Astrological analysis: {name} {zodiac}").format(name=person.name, zodiac=person.sun.emoji),
@@ -110,4 +113,5 @@ async def create_telegraph_article(state_data: dict, poll_answer: types.PollAnsw
         except Exception as err:
             print(err)
 
+    print(telegraph_response["url"])
     return telegraph_response["url"], natal_summary

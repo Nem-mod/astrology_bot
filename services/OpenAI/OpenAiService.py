@@ -36,7 +36,6 @@ class OpenAIService:
                                prompt: str,
                                model: str = "dall-e-3",
                                size: Literal["256x256", "512x512", "1024x1024", "1792x1024", "1024x1792"] = "1024x1024",
-                               extra_query: str = None,
                                source_dir: str = "./sources"
                                ):
 
@@ -45,7 +44,6 @@ class OpenAIService:
             n=1,
             size=size,
             prompt=prompt,
-            extra_query=extra_query,
             response_format="b64_json"
         )
         images_dt = datetime.utcfromtimestamp(images_response.created)

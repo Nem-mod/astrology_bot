@@ -16,9 +16,10 @@ from states import NatalStates
 
 
 async def callback_start(message: types.message.Message, state: FSMContext) -> None:
-    state_data = await state.get_data()
-    crm_id = state_data.get("crm_record_id")
-    if not crm_id == None:
+    mongo_client = MongoDbService()
+    user = await mongo_client.get_user(message.from_user.id)
+
+    if user:
         return
     try:
         record = await ClickUpService.add_to_crm(
@@ -39,11 +40,11 @@ async def callback_start(message: types.message.Message, state: FSMContext) -> N
         await state.update_data({"natal_count": "0"})
         await state.update_data({"crm_record_id": record["id"]})
 
-        mongo_client = MongoDbService()
         await mongo_client.insert_user({
             "user_id": message.from_user.id,
             "crm_id": record["id"],
-            "natal_count": 0
+            "natal_chart_left": 1,
+            "assistant_questions_left": 3
         })
 
     except Exception as err:
@@ -55,6 +56,11 @@ async def callback_start(message: types.message.Message, state: FSMContext) -> N
         text=_("Please choose your language 🌐"),
         reply_markup=buttons
     )
+
+async def callback_delete_me(message: types.message.Message, state: FSMContext):
+    mongo_client = MongoDbService()
+    await mongo_client.delete_user(message.from_user.id)
+    await state.clear()
 
 
 async def callback_select_language(

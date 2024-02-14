@@ -9,7 +9,7 @@ from aiogram.utils.i18n import gettext as _
 
 from controllers.user.utils import create_telegraph_article, form_not_completed
 from db import MongoDbService
-from keyboards.natal_chart import get_geonames_buttons, get_select_gender_buttons
+from keyboards.natal_chart import get_geonames_buttons, get_select_gender_buttons, get_buy_buttons
 from keyboards.natal_chart.callbacks import GeoNameCallback, GendersCallback
 from keyboards.user import get_proceed_buttons
 from services import ClickUpService
@@ -18,26 +18,35 @@ from states import NatalStates
 
 from utils import TelegraphHelper
 
-
-async def callback_start_calculation(callback_query: types.CallbackQuery, state: FSMContext):
-    state_data = await state.get_data()
+# TODO: refactor check availability
+async def check_natal_chart_is_available(state_data, user_id) -> bool:
     try:
         crm_record = await ClickUpService.get_record(state_data["crm_record_id"])
         crm_status = crm_record["status"]["status"].strip()
-    except:
-        return
-
-    try:
         mongo_client = MongoDbService()
-        user = await mongo_client.get_user(callback_query.from_user.id)
+        user = await mongo_client.get_user(user_id)
     except:
-        return
+        return False
 
     if (
-            not int(user["natal_count"]) == 0
+            int(user["natal_chart_left"]) == 0
             and not (crm_status == "trial"
-                     or crm_status == "subscription")
+                or crm_status == "subscription")
     ):
+        return False
+
+    return True
+
+
+async def callback_start_calculation(callback_query: types.CallbackQuery, state: FSMContext):
+    state_data = await state.get_data()
+    is_available = await check_natal_chart_is_available(state_data, callback_query.from_user.id)
+    if not is_available:
+        buttons = get_buy_buttons()
+        await callback_query.message.answer(
+            text=_("Looks like you enjoy chatting with me!\n\n❓Questions and suggestions? Write to @maginoid"),
+            reply_markup=buttons
+        )
         return
 
     keyboard_builder = InlineKeyboardBuilder()
@@ -53,16 +62,13 @@ async def callback_start_calculation(callback_query: types.CallbackQuery, state:
 
 async def handle_calculate(message: types.message.Message, state: FSMContext):
     state_data = await state.get_data()
-    try:
-        crm_record = await ClickUpService.get_record(state_data["crm_record_id"])
-        crm_status = crm_record["status"]["status"].strip()
-    except:
-        return
-
-    if (not int(state_data["natal_count"]) == 0
-            and not (crm_status == "trial"
-                     or crm_status == "subscription")
-    ):
+    is_available = await check_natal_chart_is_available(state_data, message.from_user.id)
+    if not is_available:
+        buttons = get_buy_buttons()
+        await message.answer(
+            text=_("Looks like you enjoy chatting with me!\n\n❓Questions and suggestions? Write to @maginoid"),
+            reply_markup=buttons
+        )
         return
 
     keyboard_builder = InlineKeyboardBuilder()
@@ -297,7 +303,10 @@ async def callback_chose_city(callback_query: types.CallbackQuery, state: FSMCon
 async def handle_poll_answer(poll_answer: types.PollAnswer, state: FSMContext, bot: Bot,
                              apscheduler: ContextSchedulerDecorator):
     state_data = await state.get_data()
-    apscheduler.remove_job(state_data["scheduler_job_id"])
+    try:
+        apscheduler.remove_job(state_data["scheduler_job_id"])
+    except:
+        pass
     try:
         await ClickUpService.update_task_custom_status(task_id=state_data["crm_record_id"], value="form completed")
     except Exception as err:
@@ -309,11 +318,10 @@ async def handle_poll_answer(poll_answer: types.PollAnswer, state: FSMContext, b
     await bot.send_message(text=_("Calculating the natal chart. It will take 2 min..."),
                            chat_id=state_data["chat_id"])
 
-    telegraph_link, natal_summary = create_telegraph_article(state_data, poll_answer)
+    telegraph_link, natal_summary = await create_telegraph_article(state_data, poll_answer)
 
     await bot.send_message(
-        text=_("Your analysis is ready. Click the link below👇\n{link}")
-        .format(link=telegraph_link),
+        text=_("Your analysis is ready. Click the link below👇\n") + f"{telegraph_link}",
         chat_id=state_data["chat_id"]
     )
 
@@ -358,7 +366,7 @@ async def handle_poll_answer(poll_answer: types.PollAnswer, state: FSMContext, b
             user_id=state_data["chat_id"],
             data={
                 "$inc": {
-                    "natal_count": 1
+                    "natal_count": -1
                 },
                 "$set": {
                     "natal_summary": natal_summary
