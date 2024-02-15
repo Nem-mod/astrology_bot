@@ -32,6 +32,7 @@ routes = web.RouteTableDef()
 @routes.post("/wallet/order")
 async def apply_wallet_transaction(request: BaseRequest):
     data = await request.json()
+    print("---------------------------------WEBHOOK--------------------------")
     pprint.pprint(data)
     for event in data:
         if event["type"] == "ORDER_PAID":
@@ -45,6 +46,9 @@ async def apply_wallet_transaction(request: BaseRequest):
                 data["selectedPaymentOption"]["amount"]["currencyCode"]  # В какой криптовалюте
             ))
             print(data["customData"])
+
+    print("---------------------------------WEBHOOK--------------------------")
+    return web.Response(status=200)
 
 async def on_startup(bot: Bot):
     await bot.set_webhook(
