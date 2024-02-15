@@ -47,7 +47,7 @@ async def apply_wallet_transaction(request: web.Request):
             })
 
             user = await mongo_client.get_user(user_id)
-            locale = user.get("locale")
+            locale = user["locale"]
             if locale == "ru":
                 answer_msg = f"💰 Платеж прошел успешно. Ты купил {data['description']}"
             if locale == "uk":
@@ -58,7 +58,7 @@ async def apply_wallet_transaction(request: web.Request):
             await bot.send_message(chat_id=user_id, text=answer_msg)
 
     print("---------------------------------$--------------------------")
-    raise web.HTTPFound(location="https://t.me/astrolog_ai_bot")
+    return web.Response(status=200)
 
 
 async def on_startup(bot: Bot):
