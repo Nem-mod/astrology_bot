@@ -39,7 +39,7 @@ async def callback_create_order(callback_query: types.CallbackQuery, state: FSMC
                 },
                 "autoConversionCurrency": "USDT",
                 "description": f"{callback_data.description}",
-                "returnUrl": f"{config.server.url}/wallet/order",
+                "returnUrl": f"https://t.me/astrolog_ai_bot",
                 "failReturnUrl": f"{config.server.url}/wallet/order",
                 "customData": webhook_data,
                 "externalId": externalId,

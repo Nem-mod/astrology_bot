@@ -37,9 +37,9 @@ async def apply_wallet_transaction(request: web.Request):
             data = event["payload"]
             custom_data: str = data["customData"]
             user_id, service_amount, service_type = custom_data.split("_")
+            user_id = int(user_id)
             print("---------------------------------MONGO--------------------------")
             user = await mongo_client.get_user(user_id)
-            print(user)
             if not user:
                 continue
             if service_type == "nt":
