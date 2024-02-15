@@ -73,7 +73,6 @@ async def handle_chat(message: types.Message, state: FSMContext):
         {"role": "assistant", "content": natal_analysis}
     ]
     history = await mongo_client.get_chat_messages(chat_id=chat_id, limit=6)
-    print(history)
 
     for h_msg in history:
         gpt_messages.append({"role": h_msg["role"], "content": h_msg["content"]})
