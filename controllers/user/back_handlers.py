@@ -4,10 +4,15 @@ from aiogram.utils.i18n import gettext as _, FSMI18nMiddleware
 from aiogram.utils.keyboard import InlineKeyboardBuilder
 
 from keyboards.natal_chart import get_select_gender_buttons
-from states import NatalStates
+from states import NatalStates, UserStates
 
 
 async def callback_back_from_select_name(callback_query: types.CallbackQuery, state: FSMContext):
+    state_data = await state.get_data()
+    if state_data["chat_is_available"]:
+        await state.set_state(UserStates.va_chat)
+    else:
+        await state.set_state()
     await callback_query.message.delete()
 
 async def callback_back_from_gender(callback_query: types.CallbackQuery, state: FSMContext):
