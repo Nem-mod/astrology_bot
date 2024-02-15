@@ -5,9 +5,6 @@ from motor.motor_asyncio import AsyncIOMotorClient
 
 from data.config import config
 
-uri = ""
-
-
 class MongoDbService:
     def __init__(self):
         self._client = AsyncIOMotorClient(config.database.mongo_url)
