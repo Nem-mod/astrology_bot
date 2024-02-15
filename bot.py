@@ -40,21 +40,22 @@ async def apply_wallet_transaction(request: web.Request):
             else:
                 ctx_amount = ("assistant_questions_left")
 
-            await mongo_client.update_user(user_id, {
+            log = await mongo_client.update_user(user_id, {
                 "$inc": {
                     ctx_amount: int(service_amount)
                 }
             })
-
+            print("---------------------------------MONGO--------------------------")
+            print(log)
             user = await mongo_client.get_user(user_id)
-            locale = user["locale"]
-            if locale == "ru":
-                answer_msg = f"💰 Платеж прошел успешно. Ты купил {data['description']}"
-            if locale == "uk":
-                answer_msg = f"💰 Платіж пройшов успішно. Ти купив  {data['description']}"
-            else:
-                answer_msg = f"💰 Payment was successful. You have purchased {data['description']}"
-
+            # locale = user["locale"]
+            # if locale == "ru":
+            #     answer_msg = f"💰 Платеж прошел успешно. Ты купил {data['description']}"
+            # if locale == "uk":
+            #     answer_msg = f"💰 Платіж пройшов успішно. Ти купив  {data['description']}"
+            # else:
+            answer_msg = f"💰 Payment was successful. You have purchased {data['description']}"
+            print(user)
             await bot.send_message(chat_id=user_id, text=answer_msg)
 
     print("---------------------------------$--------------------------")
