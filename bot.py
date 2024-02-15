@@ -56,11 +56,11 @@ async def apply_wallet_transaction(request: web.Request):
 
             locale = user["locale"]
             if locale == "ru":
-                answer_msg = f"💰 Платеж прошел успешно. Ты купил {data['description']}"
+                answer_msg = f"💰 Платеж прошел успешно."
             if locale == "uk":
-                answer_msg = f"💰 Платіж пройшов успішно. Ти купив  {data['description']}"
+                answer_msg = f"💰 Платіж пройшов успішно."
             else:
-                answer_msg = f"💰 Payment was successful. You have purchased {data['description']}"
+                answer_msg = f"💰 Payment was successful."
             await bot.send_message(chat_id=user_id, text=answer_msg)
 
     print("---------------------------------$--------------------------")
