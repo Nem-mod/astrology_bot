@@ -34,9 +34,10 @@ async def callback_start_chat(callback_query: types.CallbackQuery, state: FSMCon
             "three free questions.")
     )
     await state.set_state(UserStates.va_chat)
-
+    await state.update_data({"chat_is_available": True})
 
 async def handle_chat(message: types.Message, state: FSMContext):
+    chat_id = message.from_user.id
     state_data = await state.get_data()
     mongo_client = MongoDbService()
     user = await mongo_client.get_user(message.from_user.id)
@@ -71,6 +72,11 @@ async def handle_chat(message: types.Message, state: FSMContext):
         {"role": "user", "content": "What is my natal chart analysis?"},
         {"role": "assistant", "content": natal_analysis}
     ]
+    history = await mongo_client.get_chat_messages(chat_id=chat_id, limit=6)
+    print(history)
+
+    for h_msg in history:
+        gpt_messages.append({"role": h_msg["role"], "content": h_msg["content"]})
 
     answer, messages = await openai_client.chat_completion(
         query=query_message,
@@ -79,3 +85,24 @@ async def handle_chat(message: types.Message, state: FSMContext):
     )
 
     await message.answer(answer)
+
+    await mongo_client.update_user(
+        user_id=state_data["chat_id"],
+        data={
+            "$inc": {
+                "assistant_questions_left": -1
+            }
+        }
+    )
+
+    await mongo_client.add_chat_message(
+        chat_id=chat_id,
+        role="user",
+        message=message.text
+    )
+
+    await mongo_client.add_chat_message(
+        chat_id=chat_id,
+        role="assistant",
+        message=answer
+    )
