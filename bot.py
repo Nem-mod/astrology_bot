@@ -137,7 +137,7 @@ def main() -> None:
     webhook_requests_handler.register(app, path=WEBHOOK_PATH)
     setup_application(app, dp, bot=bot)
     # TODO: create WEBSERVER_HOST_PAR
-    web.run_app(app, host="127.0.0.1", port=WEB_SERVER_PORT)
+    web.run_app(app, host="0.0.0.0", port=WEB_SERVER_PORT)
     # await dp.start_polling(bot)
 
 
