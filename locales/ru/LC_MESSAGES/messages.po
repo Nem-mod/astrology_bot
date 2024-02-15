@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2024-02-15 14:14+0200\n"
-"PO-Revision-Date: 2024-02-15 14:15+0200\n"
+"POT-Creation-Date: 2024-02-15 18:33+0200\n"
+"PO-Revision-Date: 2024-02-15 18:35+0200\n"
 "Last-Translator: \n"
 "Language-Team: ru <LL@li.org>\n"
 "Language: ru\n"
@@ -22,9 +22,9 @@ msgstr ""
 
 #: controllers/user/back_handlers.py:22 controllers/user/back_handlers.py:45
 #: controllers/user/back_handlers.py:62 controllers/user/natal_chart.py:54
-#: controllers/user/natal_chart.py:76 controllers/user/natal_chart.py:126
-#: controllers/user/natal_chart.py:166 controllers/user/natal_chart.py:199
-#: controllers/user/natal_chart.py:236
+#: controllers/user/natal_chart.py:76 controllers/user/natal_chart.py:127
+#: controllers/user/natal_chart.py:167 controllers/user/natal_chart.py:200
+#: controllers/user/natal_chart.py:237
 #: keyboards/natal_chart/get_geonames_buttons.py:27
 #: keyboards/natal_chart/get_select_gender_buttons.py:27
 msgid "⬅️ Back"
@@ -39,7 +39,7 @@ msgstr "Как Вас зовут?"
 msgid "Choose your gender"
 msgstr "Выберите свой пол"
 
-#: controllers/user/back_handlers.py:49 controllers/user/natal_chart.py:130
+#: controllers/user/back_handlers.py:49 controllers/user/natal_chart.py:131
 msgid ""
 "Enter the day, month and year of your birth in the format DD.MM.YYYY. For "
 "example: 31.12.1990"
@@ -47,12 +47,12 @@ msgstr ""
 "Введите день, месяц и год вашего рождения в формате ДД.ММ.ГГГГ. Например: "
 "31.12.1990"
 
-#: controllers/user/back_handlers.py:58 controllers/user/natal_chart.py:162
+#: controllers/user/back_handlers.py:58 controllers/user/natal_chart.py:163
 #: keyboards/natal_chart/SimpleTimeChooser.py:67
 msgid "I dont know exact time"
 msgstr "Я не знаю точного времени"
 
-#: controllers/user/back_handlers.py:67 controllers/user/natal_chart.py:171
+#: controllers/user/back_handlers.py:67 controllers/user/natal_chart.py:172
 msgid ""
 "What time were you born? Type a time in 24 hours format HH:mm. For example: "
 "23:20.  If you don't know, select 'I don't know exact time' we will use "
@@ -73,45 +73,53 @@ msgstr ""
 "\n"
 "❓ Вопросы и предложения? Пиши @maginoid"
 
-#: controllers/user/natal_chart.py:150
+#: controllers/user/natal_chart.py:151
 msgid "Inputted value is invalid, correct format is DD.MM.YYYY"
 msgstr "Введенное значение недействительно, правильный формат - ДД.ММ.ГГГГ"
 
-#: controllers/user/natal_chart.py:203 controllers/user/natal_chart.py:241
+#: controllers/user/natal_chart.py:204 controllers/user/natal_chart.py:242
 msgid "Write the city and country of birth, for example: Nikolaev, Ukraine."
 msgstr "Напишите город и страну рождения, например: Николаев, Украина."
 
-#: controllers/user/natal_chart.py:225
+#: controllers/user/natal_chart.py:226
 msgid "Inputted value is invalid, correct format is HH:MM"
 msgstr "Введенное значение неверно. Правильный формат: ЧЧ:ММ"
 
-#: controllers/user/natal_chart.py:262
+#: controllers/user/natal_chart.py:263
 msgid "No locations has found. Write location correctly"
 msgstr "Не найдено ни одного местоположения. Напишите место рождения правильно"
 
-#: controllers/user/natal_chart.py:265
+#: controllers/user/natal_chart.py:266
 msgid "<b>Confirm your place of birth:</b>"
 msgstr "<b>Подтвердите свое место рождения:</b>"
 
-#: controllers/user/natal_chart.py:281
+#: controllers/user/natal_chart.py:282
 msgid "You location {location_name} confirmed"
 msgstr "Ваше местоположение {location_name} подтверждено"
 
-#: controllers/user/natal_chart.py:289
+#: controllers/user/natal_chart.py:290
 msgid "Choose topics that interest you (at least one):"
 msgstr "Выберите темы, которые вас интересуют (хотя бы одну):"
 
-#: controllers/user/natal_chart.py:318
+#: controllers/user/natal_chart.py:319
 msgid "Calculating the natal chart. It will take 2 min..."
 msgstr "Расчет натальной карты. Это займет 2 мин..."
 
-#: controllers/user/natal_chart.py:324
+#: controllers/user/natal_chart.py:325
 msgid "Your analysis is ready. Click the link below👇\n"
 msgstr "Твой разбор готов. Нажми на ссылку ниже👇\n"
 
-#: controllers/user/natal_chart.py:382
+#: controllers/user/natal_chart.py:383
 msgid "Shall we continue our conversation?"
 msgstr "Продолжим общение?"
+
+#: controllers/user/order.py:57
+msgid "Buy"
+msgstr "Оплатить"
+
+#: controllers/user/order.py:65
+msgid "Your order is ready. To continue press \"Buy\" button"
+msgstr "Ваш заказ готов. Чтобы продолжить, нажмите кнопку \"Оплатить\""
 
 #: controllers/user/start.py:56
 msgid "Please choose your language 🌐"
@@ -239,23 +247,39 @@ msgstr ""
 msgid "Confirm"
 msgstr "Подтвердить"
 
-#: keyboards/natal_chart/get_buy_buttons.py:8
+#: keyboards/natal_chart/get_buy_buttons.py:11
 msgid "📄 Buy 10 analyses for $10"
 msgstr "📄 Купить 10 разборов за $10"
 
-#: keyboards/natal_chart/get_buy_buttons.py:12
+#: keyboards/natal_chart/get_buy_buttons.py:16
+msgid "📄 10 analyses"
+msgstr "📄 10 разборов "
+
+#: keyboards/natal_chart/get_buy_buttons.py:20
 msgid "📄 Buy 30 analyses for $25"
 msgstr "📄 Купить 30 разборов за $25"
 
-#: keyboards/natal_chart/get_buy_buttons.py:16
+#: keyboards/natal_chart/get_buy_buttons.py:25
+msgid "📄 30 analyses"
+msgstr "📄 30 разборов"
+
+#: keyboards/natal_chart/get_buy_buttons.py:29
 msgid "📄 Buy 1000 analyses for $150"
 msgstr "📄 Купить 1000 разборов за $150"
 
-#: keyboards/natal_chart/get_buy_buttons.py:20
+#: keyboards/natal_chart/get_buy_buttons.py:34
+msgid "📄 1000 analyses"
+msgstr "📄 1000 разборов "
+
+#: keyboards/natal_chart/get_buy_buttons.py:39
 msgid "💬 Buy 100 questions for $5"
 msgstr "💬 Купить 100 вопросов за $5"
 
-#: keyboards/natal_chart/get_buy_buttons.py:25
+#: keyboards/natal_chart/get_buy_buttons.py:44
+msgid "💬 100 questions"
+msgstr "💬 100 вопросов"
+
+#: keyboards/natal_chart/get_buy_buttons.py:49
 msgid "🎁 Donation"
 msgstr "🎁 Донейшен"
 
