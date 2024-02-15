@@ -9,7 +9,7 @@ from states import NatalStates, UserStates
 
 async def callback_back_from_select_name(callback_query: types.CallbackQuery, state: FSMContext):
     state_data = await state.get_data()
-    if state_data["chat_is_available"]:
+    if state_data.get("chat_is_available"):
         await state.set_state(UserStates.va_chat)
     else:
         await state.set_state()

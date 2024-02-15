@@ -11,6 +11,7 @@ from services import OpenAIService, ClickUpService
 from utils import TelegraphHelper
 from utils.create_table_chart import create_table_chart
 
+
 async def form_not_completed(bot: Bot, chat_id: str, crm_record_id: str):
     await bot.send_message(
         chat_id=chat_id,
@@ -22,7 +23,6 @@ async def form_not_completed(bot: Bot, chat_id: str, crm_record_id: str):
 
 
 async def create_telegraph_article(state_data: dict, poll_answer: types.PollAnswer) -> tuple[str, str]:
-
     person = AstrologicalSubject(
         name=state_data["name"],
         year=int(state_data["birth_year"]),
@@ -48,7 +48,8 @@ async def create_telegraph_article(state_data: dict, poll_answer: types.PollAnsw
     system_prompt = _(
         "You're an astrologer aiming for maximum personalization of responses based on the user's astrological data. "
         "Communicate using \"you\", adopting a youthful style with elements of modern slang, but do so flexibly and "
-        "appropriately. Inject humor and amusing descriptions where it's adequate and cannot be misinterpreted.\n\n"
+        "appropriately. Inject humor and amusing descriptions where it's adequate and cannot be misinterpreted.\n"
+        "Do not use Markdown. Answer in English language"
     )
 
     query_message = _(
@@ -96,10 +97,38 @@ async def create_telegraph_article(state_data: dict, poll_answer: types.PollAnsw
 
         for image in images:
             image_th_path = await telegraph.upload_file(image)
-            html_content += f'<img src="{image_th_path[0]["src"]}">'
+
+            fig_caption = _("Your expected image based on personal characteristics from your natal chart.")
+            image_block = (
+                f'<aside dir="auto"><br></aside>'
+                f'<aside dir="auto"><br></aside>'
+                f'<figure contenteditable=\"false\">'
+                f'<p class=\"figure_wrapper\"><img src=\"{image_th_path[0]["src"]}\"></p>'
+                f'<figcaption dir="auto" class="editable_text" data-placeholder="Caption (optional)">{fig_caption}</figcaption>'
+                f'</figure>'
+            )
+            html_content += image_block
     except Exception as err:
         images = []
         print(err)
+
+    help_questions_text = _(
+        "For all questions and wishes, cooperation, as well as the creation of AI bots, write to me in telegram")
+    copyright_text = _("The analysis was created using")
+    footer_html = (
+        f'<aside dir="auto"><br></aside>'
+        f'<aside dir="auto">_______</aside>'
+        f'<aside dir="auto" class="__web-inspector-hide-shortcut__">{help_questions_text} '
+        f'  <a href="https://t.me/maginoid" target="_blank">@maginoid</a>'
+        f'</aside>'
+        f'<aside dir="auto">_______</aside>'
+        f'<aside dir="auto"><em>{copyright_text} </em>'
+        f'  <a href="http://t.me/astrolog_ai_bot" target="_blank"><em>AstroBot</em></a>'
+        f'</aside>'
+        f'<aside dir="auto">Powered by © JetOffice</aside>'
+    )
+
+    html_content += footer_html
 
     telegraph_response = await telegraph.create_page(
         title=_("Astrological analysis: {name} {zodiac}").format(name=person.name, zodiac=person.sun.emoji),
