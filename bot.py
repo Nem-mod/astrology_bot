@@ -40,12 +40,13 @@ async def apply_wallet_transaction(request: web.Request):
             else:
                 ctx_amount = ("assistant_questions_left")
 
-            user = await mongo_client.update_user(user_id, {
+            await mongo_client.update_user(user_id, {
                 "$inc": {
                     ctx_amount: int(service_amount)
                 }
             })
 
+            user = await mongo_client.get_user(user_id)
             locale = user.get("locale")
             if locale == "ru":
                 answer_msg = f"💰 Платеж прошел успешно. Ты купил {data['description']}"
