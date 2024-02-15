@@ -1,4 +1,5 @@
 import logging
+import pprint
 import sys
 
 import controllers
@@ -30,11 +31,17 @@ async def apply_wallet_transaction(request: web.Request):
     data = await request.json()
     print("---------------------------------$Transaction--------------------------")
     mongo_client = MongoDbService()
+    pprint.pprint(data)
     for event in data:
         if event["type"] == "ORDER_PAID":
             data = event["payload"]
             custom_data: str = data["customData"]
             user_id, service_amount, service_type = custom_data.split("_")
+            print("---------------------------------MONGO--------------------------")
+            user = await mongo_client.get_user(user_id)
+            print(user)
+            if not user:
+                continue
             if service_type == "nt":
                 ctx_amount = "natal_chart_left"
             else:
@@ -45,17 +52,15 @@ async def apply_wallet_transaction(request: web.Request):
                     ctx_amount: int(service_amount)
                 }
             })
-            print("---------------------------------MONGO--------------------------")
             print(log)
-            user = await mongo_client.get_user(user_id)
-            # locale = user["locale"]
-            # if locale == "ru":
-            #     answer_msg = f"💰 Платеж прошел успешно. Ты купил {data['description']}"
-            # if locale == "uk":
-            #     answer_msg = f"💰 Платіж пройшов успішно. Ти купив  {data['description']}"
-            # else:
-            answer_msg = f"💰 Payment was successful. You have purchased {data['description']}"
-            print(user)
+
+            locale = user["locale"]
+            if locale == "ru":
+                answer_msg = f"💰 Платеж прошел успешно. Ты купил {data['description']}"
+            if locale == "uk":
+                answer_msg = f"💰 Платіж пройшов успішно. Ти купив  {data['description']}"
+            else:
+                answer_msg = f"💰 Payment was successful. You have purchased {data['description']}"
             await bot.send_message(chat_id=user_id, text=answer_msg)
 
     print("---------------------------------$--------------------------")
