@@ -67,12 +67,4 @@ class OpenAIService:
         else:
             print("No image data was obtained. Maybe bad code?")
 
-        for image in images:
-            try:
-                fp = Path(image)
-                fp.unlink()
-            except Exception as err:
-                print(err)
-
-
         return images_filenames

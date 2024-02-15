@@ -80,6 +80,7 @@ async def handle_calculate(message: types.message.Message, state: FSMContext):
         text=_("What is your name?"),
         reply_markup=keyboard_builder.as_markup()
     )
+    await state.set_state(NatalStates.get_name)
 
 
 async def handle_get_name(message: types.message.Message, state: FSMContext,
