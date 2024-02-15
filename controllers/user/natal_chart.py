@@ -115,6 +115,7 @@ async def handle_get_name(message: types.message.Message, state: FSMContext,
     )
     await state.update_data({"scheduler_job_id": job.id})
     await state.set_state(NatalStates.get_gender)
+
 async def callback_get_gender(
         callback_query: types.CallbackQuery,
         state: FSMContext,

@@ -12,3 +12,9 @@ LOGGING_LEVEL = 10
 BOT_TOKEN = config.bot.token
 
 REDIS_SERVER = config.redis
+
+WALLET_HEADERS = {
+    "Wpay-Store-Api-Key": config.wallet.token,
+    "Content-Type": "application/json",
+    "Accept": "application/json"
+}

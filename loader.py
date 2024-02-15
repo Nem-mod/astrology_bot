@@ -38,6 +38,10 @@ class Database:
     mongo_url: str
 
 @dataclass
+class Wallet:
+    token: str
+
+@dataclass
 class Config:
     bot: TelegramBot
     server: HttpClient
@@ -45,6 +49,7 @@ class Config:
     redis: RedisStorage
     clickup: ClickUp
     database: Database
+    wallet: Wallet
 
 
 def load_config(path: str = None) -> Config:
@@ -75,5 +80,8 @@ def load_config(path: str = None) -> Config:
         ),
         database=Database(
             mongo_url=env.str('MONGODB_URL')
+        ),
+        wallet=Wallet(
+            token=env.str("WALLET_TOKEN")
         )
     )

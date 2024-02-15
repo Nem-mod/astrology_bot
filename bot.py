@@ -1,7 +1,9 @@
-import asyncio
-import datetime
 import logging
+import pprint
 import sys
+
+from aiohttp.abc import BaseRequest
+
 import controllers
 import utils
 
@@ -22,19 +24,41 @@ from middlewares import StructLoggingMiddleware
 from middlewares.scheduler import SchedulerMiddleware
 
 
+
+
+routes = web.RouteTableDef()
+
+
+@routes.post("/wallet/order")
+async def apply_wallet_transaction(request: BaseRequest):
+    data = await request.json()
+    pprint.pprint(data)
+    for event in data:
+        if event["type"] == "ORDER_PAID":
+            data = event["payload"]
+            pprint.pprint(data)
+            print("Оплачен счет N {} на сумму {} {}. Оплата {} {}.".format(
+                data["externalId"],  # ID счета в вашем боте, который мы указывали при создании ссылки для оплаты
+                data["orderAmount"]["amount"],  # Сумма счета, указанная при создании ссылки для оплаты
+                data["orderAmount"]["currencyCode"],  # Валюта счета
+                data["selectedPaymentOption"]["amount"]["amount"],  # Сколько оплатил покупатель
+                data["selectedPaymentOption"]["amount"]["currencyCode"]  # В какой криптовалюте
+            ))
+            print(data["customData"])
+
 async def on_startup(bot: Bot):
-    # await bot.set_webhook(
-    #     f"{WEB_SERVER_URL}{WEBHOOK_PATH}",
-    #     secret_token=WEBHOOK_SECRET,
-    #     max_connections=1000
-    # )
-    # print(WEB_SERVER_URL)
+    await bot.set_webhook(
+        f"{WEB_SERVER_URL}{WEBHOOK_PATH}",
+        secret_token=WEBHOOK_SECRET,
+        max_connections=1000
+    )
+    print(WEB_SERVER_URL)
     pass
 
 
 async def on_shut_down(bot: Bot):
     await bot.session.close()
-    # await bot.delete_webhook()
+    await bot.delete_webhook()
 
 
 def init_routers(dp: Dispatcher):
@@ -64,20 +88,8 @@ def setup_aiogram(dp: Dispatcher, scheduler) -> None:
     setup_middlewares(dp, scheduler)
 
 
-async def current_time():
-    print(f"\n\nAAAAAA --- {datetime.datetime.now()}\n\n")
-
-
-async def clb_test(bot: Bot):
-    await bot.send_message(
-        chat_id=1483647254,
-        text=f"\n\nAAAAAA --- {datetime.datetime.now()}\n\n"
-    )
-
-
-async def main() -> None:
+def main() -> None:
     bot = Bot(token=BOT_TOKEN, parse_mode='HTML')
-    await bot.delete_webhook()
     if REDIS_SERVER.redis_enabled:
         storage = RedisStorage(
             redis=Redis(
@@ -101,7 +113,6 @@ async def main() -> None:
         }
 
         scheduler = ContextSchedulerDecorator(AsyncIOScheduler(timezone="Europe/Kyiv", jobstores=job_stores))
-
     else:
         scheduler = ContextSchedulerDecorator(AsyncIOScheduler(timezone="Europe/Kyiv"))
         storage = MemoryStorage()
@@ -109,28 +120,27 @@ async def main() -> None:
     dp = Dispatcher(storage=storage)
 
     scheduler.ctx.add_instance(bot, declared_class=Bot)
-
     scheduler.start()
 
     dp.startup.register(on_startup)
     dp.shutdown.register(on_shut_down)
     setup_aiogram(dp, scheduler)
 
-    # app = web.Application()
-    #
-    # webhook_requests_handler = SimpleRequestHandler(
-    #     dispatcher=dp,
-    #     bot=bot,
-    #     handle_in_background=True
-    # )
-    #
-    # webhook_requests_handler.register(app, path=WEBHOOK_PATH)
-    # setup_application(app, dp, bot=bot)
-    # # TODO: create WEBSERVER_HOST_PAR
-    # web.run_app(app, host="127.0.0.1", port=WEB_SERVER_PORT)
-    await dp.start_polling(bot)
+    app = web.Application()
+
+    webhook_requests_handler = SimpleRequestHandler(
+        dispatcher=dp,
+        bot=bot,
+        handle_in_background=True
+    )
+
+    webhook_requests_handler.register(app, path=WEBHOOK_PATH)
+    setup_application(app, dp, bot=bot)
+    # TODO: create WEBSERVER_HOST_PAR
+    web.run_app(app, host="127.0.0.1", port=WEB_SERVER_PORT)
+    # await dp.start_polling(bot)
 
 
 if __name__ == "__main__":
     logging.basicConfig(level=logging.INFO, stream=sys.stdout)
-    asyncio.run(main())
+    main()

@@ -1,10 +1,10 @@
 from aiogram import Router, F
 from aiogram.filters import Command
 
-from controllers.user import start, natal_chart
+from controllers.user import start, natal_chart, order
 from controllers.user import back_handlers as back
 from keyboards.natal_chart.callbacks import GeoNameCallback, GeoNameActions, \
-    GendersCallback
+    GendersCallback, OrderCallback
 from keyboards.user.callbacks import SetLocalesCallback
 from states import NatalStates
 
@@ -43,5 +43,9 @@ def prepare_router() -> Router:
                                         lambda c: c.data == "/cancel_get_birthtime")
     user_router.callback_query.register(back.callback_back_from_birth_city, NatalStates.get_birth_city,
                                         lambda c: c.data == "/cancel_get_birth_city")
+
+    # ORDERS
+
+    user_router.callback_query.register(order.callback_create_order, OrderCallback.filter())
 
     return user_router
