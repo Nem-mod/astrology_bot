@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2024-02-13 23:29+0200\n"
-"PO-Revision-Date: 2024-02-13 23:32+0200\n"
+"POT-Creation-Date: 2024-02-15 14:14+0200\n"
+"PO-Revision-Date: 2024-02-15 14:15+0200\n"
 "Last-Translator: \n"
 "Language-Team: uk <LL@li.org>\n"
 "Language: uk\n"
@@ -20,8 +20,8 @@ msgstr ""
 "Generated-By: Babel 2.14.0\n"
 "X-Generator: Poedit 3.4.2\n"
 
-#: controllers/user/back_handlers.py:17 controllers/user/back_handlers.py:40
-#: controllers/user/back_handlers.py:57 controllers/user/natal_chart.py:54
+#: controllers/user/back_handlers.py:22 controllers/user/back_handlers.py:45
+#: controllers/user/back_handlers.py:62 controllers/user/natal_chart.py:54
 #: controllers/user/natal_chart.py:76 controllers/user/natal_chart.py:126
 #: controllers/user/natal_chart.py:166 controllers/user/natal_chart.py:199
 #: controllers/user/natal_chart.py:236
@@ -30,16 +30,16 @@ msgstr ""
 msgid "⬅️ Back"
 msgstr "⬅️ Назад"
 
-#: controllers/user/back_handlers.py:21 controllers/user/natal_chart.py:58
+#: controllers/user/back_handlers.py:26 controllers/user/natal_chart.py:58
 #: controllers/user/natal_chart.py:80
 msgid "What is your name?"
 msgstr "Як вас звати?"
 
-#: controllers/user/back_handlers.py:30 controllers/user/natal_chart.py:102
+#: controllers/user/back_handlers.py:35 controllers/user/natal_chart.py:103
 msgid "Choose your gender"
 msgstr "Виберіть свою стать"
 
-#: controllers/user/back_handlers.py:44 controllers/user/natal_chart.py:130
+#: controllers/user/back_handlers.py:49 controllers/user/natal_chart.py:130
 msgid ""
 "Enter the day, month and year of your birth in the format DD.MM.YYYY. For "
 "example: 31.12.1990"
@@ -47,12 +47,12 @@ msgstr ""
 "Введіть день, місяць і рік свого народження у форматі ДД.ММ.РРРР. Наприклад: "
 "31.12.1990"
 
-#: controllers/user/back_handlers.py:53 controllers/user/natal_chart.py:162
+#: controllers/user/back_handlers.py:58 controllers/user/natal_chart.py:162
 #: keyboards/natal_chart/SimpleTimeChooser.py:67
 msgid "I dont know exact time"
 msgstr "Я не знаю точного часу"
 
-#: controllers/user/back_handlers.py:62 controllers/user/natal_chart.py:171
+#: controllers/user/back_handlers.py:67 controllers/user/natal_chart.py:171
 msgid ""
 "What time were you born? Type a time in 24 hours format HH:mm. For example: "
 "23:20.  If you don't know, select 'I don't know exact time' we will use "
@@ -63,7 +63,7 @@ msgstr ""
 "будемо використовувати час за замовчуванням."
 
 #: controllers/user/natal_chart.py:47 controllers/user/natal_chart.py:69
-#: controllers/virtual_assistant/chat.py:48
+#: controllers/virtual_assistant/chat.py:49
 msgid ""
 "Looks like you enjoy chatting with me!\n"
 "\n"
@@ -135,7 +135,7 @@ msgstr ""
 msgid "Calculate Natal chart"
 msgstr "Розрахувати натальну карту"
 
-#: controllers/user/utils.py:17
+#: controllers/user/utils.py:18
 msgid ""
 "Any difficulties? Do you ask your mother your birth time? Do you doubt "
 "AstroBot? Keep going, it will be interesting! Instead of mom, write "
@@ -152,15 +152,16 @@ msgid ""
 "youthful style with elements of modern slang, but do so flexibly and "
 "appropriately. Inject humor and amusing descriptions where it's adequate and "
 "cannot be misinterpreted.\n"
-"\n"
+"Do not use Markdown. Answer in English language"
 msgstr ""
 "Ви астролог, який прагне до максимальної персоналізації відповідей на основі "
 "астрологічних даних користувача. Спілкуйтеся на \"ти\", використовуючи "
 "молодіжний стиль з елементами сучасного сленгу, але робіть це гнучко і "
 "доречно. Використовуйте гумор і кумедні описи там, де це доречно і не може "
 "бути неправильно витлумачено\n"
+"Не використовуй Markdown. Відповідай на Українській мові"
 
-#: controllers/user/utils.py:54
+#: controllers/user/utils.py:55
 msgid ""
 "Perform a detailed astrological analysis of the user's natal chart.  Don't "
 "forget to write in your answer  house numbers when responding.\n"
@@ -172,7 +173,26 @@ msgstr ""
 "Клієнт: {name}\n"
 "Дані: {astro_data}"
 
-#: controllers/user/utils.py:105
+#: controllers/user/utils.py:101
+msgid ""
+"Your expected image based on personal characteristics from your natal chart."
+msgstr ""
+"Ваш очікуваний образ, заснований на особистих характеристиках з натальної "
+"карти."
+
+#: controllers/user/utils.py:115
+msgid ""
+"For all questions and wishes, cooperation, as well as the creation of AI "
+"bots, write to me in telegram"
+msgstr ""
+"Для  питань і побажань, співпраці, а також створення АІ-ботів пишіть мені в "
+"телеграм"
+
+#: controllers/user/utils.py:117
+msgid "The analysis was created using"
+msgstr "Аналіз був створений з використанням"
+
+#: controllers/user/utils.py:134
 msgid "Astrological analysis: {name} {zodiac}"
 msgstr "Астрологічний аналіз: {name} {zodiac}"
 
@@ -184,7 +204,7 @@ msgstr ""
 "Чудово! У мене є аналіз твоєї народжувальної карти, і я готовий відповідати "
 "на питання, ґрунтуючись на цих даних. Задай три безкоштовні питання."
 
-#: controllers/virtual_assistant/chat.py:55
+#: controllers/virtual_assistant/chat.py:56
 msgid ""
 "You're an astrologer aiming for maximum personalization of responses based "
 "on the user's astrological data. Communicate using \"you\", adopting a "
@@ -198,7 +218,7 @@ msgstr ""
 "доречно. Використовуйте гумор і кумедні описи там, де це доречно і не може "
 "бути неправильно витлумачено"
 
-#: controllers/virtual_assistant/chat.py:62
+#: controllers/virtual_assistant/chat.py:63
 msgid ""
 "Answer the question {question} according to the analysis of the natal chart. "
 "The response should not exceed 500 characters. End with a sentence inviting "
