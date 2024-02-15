@@ -9,10 +9,26 @@ from aiogram.utils.i18n import gettext as _
 from data.config import config, WALLET_HEADERS
 from keyboards.natal_chart.callbacks import OrderCallback
 
+import random
+
+
+def generate_random_string():
+    xxx = random.randint(0, 999)
+    yyy = random.randint(0, 999)
+    zzz = random.randint(0, 999)
+
+    xxx_formatted = str(xxx).zfill(3)
+    yyy_formatted = str(yyy).zfill(3)
+    zzz_formatted = str(zzz).zfill(3)
+
+    random_string = f"{xxx_formatted}-{yyy_formatted}-{zzz_formatted}"
+
+    return random_string
 
 async def callback_create_order(callback_query: types.CallbackQuery, state: FSMContext, callback_data: OrderCallback):
     user_id = callback_query.from_user.id
     webhook_data = f"{user_id}_{callback_data.amount}_{str(callback_data.type.value)}"
+    externalId = generate_random_string()
     try:
         async with aiohttp.ClientSession(headers=WALLET_HEADERS) as session:
             url = f"https://pay.wallet.tg/wpay/store-api/v1/order"
@@ -27,7 +43,7 @@ async def callback_create_order(callback_query: types.CallbackQuery, state: FSMC
                 "returnUrl": f"{config.server.url}/wallet/order",
                 "failReturnUrl": f"{config.server.url}/wallet/order",
                 "customData": webhook_data,
-                "externalId": "XXX-YYY-ZZZ",
+                "externalId": externalId,
                 "timeoutSeconds": 60 * 10,
                 "customerTelegramUserId": user_id
             }
