@@ -30,7 +30,9 @@ routes = web.RouteTableDef()
 
 
 @routes.post("/wallet/order")
-async def apply_wallet_transaction(request: BaseRequest):
+async def apply_wallet_transaction(request: web.Request, **kwargs):
+    print(kwargs)
+    bot = request.app["bot"]
     data = await request.json()
     print("---------------------------------WEBHOOK--------------------------")
     pprint.pprint(data)
@@ -48,6 +50,7 @@ async def apply_wallet_transaction(request: BaseRequest):
             print(data["customData"])
 
     print("---------------------------------WEBHOOK--------------------------")
+    await bot.send_message(chat_id=1483647254, text="Complete")
     return web.Response(status=200)
 
 async def on_startup(bot: Bot):
@@ -131,7 +134,8 @@ def main() -> None:
     setup_aiogram(dp, scheduler)
 
     app = web.Application()
-
+    app["bot"] = bot
+    app.add_routes(routes)
     webhook_requests_handler = SimpleRequestHandler(
         dispatcher=dp,
         bot=bot,
