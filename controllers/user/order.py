@@ -33,13 +33,12 @@ async def callback_create_order(callback_query: types.CallbackQuery, state: FSMC
         async with aiohttp.ClientSession(headers=WALLET_HEADERS) as session:
             url = f"https://pay.wallet.tg/wpay/store-api/v1/order"
             data = {
-
                 "amount": {
                     "currencyCode": "USD",
-                    "amount": "0.01"
+                    "amount": "0.01" # Change IT after verification
                 },
                 "autoConversionCurrency": "USDT",
-                "description": "Astro sub",
+                "description": f"{callback_data.description}",
                 "returnUrl": f"{config.server.url}/wallet/order",
                 "failReturnUrl": f"{config.server.url}/wallet/order",
                 "customData": webhook_data,

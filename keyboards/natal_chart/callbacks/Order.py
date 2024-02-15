@@ -9,5 +9,6 @@ class OrderTypes(str, Enum):
 class OrderCallback(CallbackData, prefix="sch"):
     amount: int
     cost: int
+    description: str
     type: OrderTypes
 

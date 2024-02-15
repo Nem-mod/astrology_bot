@@ -20,38 +20,48 @@ from aiohttp import web
 from redis.asyncio import Redis
 from data.config import WEBHOOK_PATH, WEB_SERVER_URL, BOT_TOKEN, WEB_SERVER_PORT, WEBHOOK_SECRET, \
     REDIS_SERVER
+from db import MongoDbService
 from middlewares import StructLoggingMiddleware
 from middlewares.scheduler import SchedulerMiddleware
-
-
-
 
 routes = web.RouteTableDef()
 
 
 @routes.post("/wallet/order")
-async def apply_wallet_transaction(request: web.Request, **kwargs):
-    print(kwargs)
+async def apply_wallet_transaction(request: web.Request):
     bot = request.app["bot"]
     data = await request.json()
-    print("---------------------------------WEBHOOK--------------------------")
-    pprint.pprint(data)
+    print("---------------------------------$Transaction--------------------------")
+    mongo_client = MongoDbService()
     for event in data:
         if event["type"] == "ORDER_PAID":
             data = event["payload"]
-            pprint.pprint(data)
-            print("Оплачен счет N {} на сумму {} {}. Оплата {} {}.".format(
-                data["externalId"],  # ID счета в вашем боте, который мы указывали при создании ссылки для оплаты
-                data["orderAmount"]["amount"],  # Сумма счета, указанная при создании ссылки для оплаты
-                data["orderAmount"]["currencyCode"],  # Валюта счета
-                data["selectedPaymentOption"]["amount"]["amount"],  # Сколько оплатил покупатель
-                data["selectedPaymentOption"]["amount"]["currencyCode"]  # В какой криптовалюте
-            ))
-            print(data["customData"])
+            custom_data: str = data["customData"]
+            user_id, service_amount, service_type = custom_data.split("_")
+            if service_type == "nt":
+                ctx_amount = "natal_chart_left"
+            else:
+                ctx_amount = ("assistant_questions_left")
 
-    print("---------------------------------WEBHOOK--------------------------")
-    await bot.send_message(chat_id=1483647254, text="Complete")
-    return web.Response(status=200)
+            user = await mongo_client.update_user(user_id, {
+                "$inc": {
+                    ctx_amount: service_amount
+                }
+            })
+
+            locale = user.get("locale")
+            if locale == "ru":
+                answer_msg = f"💰 Платеж прошел успешно. Ты купил {data['description']}"
+            if locale == "uk":
+                answer_msg = f"💰 Платіж пройшов успішно. Ти купив  {data['description']}"
+            else:
+                answer_msg = f"💰 Payment was successful. You have purchased {data['description']}"
+
+            await bot.send_message(chat_id=user_id, text=answer_msg)
+
+    print("---------------------------------$--------------------------")
+    raise web.HTTPFound(location="https://t.me/astrolog_ai_bot")
+
 
 async def on_startup(bot: Bot):
     await bot.set_webhook(

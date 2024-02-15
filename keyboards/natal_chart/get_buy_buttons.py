@@ -12,7 +12,8 @@ def get_buy_buttons() -> InlineKeyboardMarkup:
         callback_data=OrderCallback(
             amount=10,
             cost=10,
-            type=OrderTypes.NATAL_CHARTS
+            type=OrderTypes.NATAL_CHARTS,
+            description=_("📄 10 analyses")
         )
     )
     keyboard_builder.button(
@@ -20,7 +21,8 @@ def get_buy_buttons() -> InlineKeyboardMarkup:
         callback_data=OrderCallback(
             amount=30,
             cost=25,
-            type=OrderTypes.NATAL_CHARTS
+            type=OrderTypes.NATAL_CHARTS,
+            description=_("📄 30 analyses")
         )
     )
     keyboard_builder.button(
@@ -28,7 +30,8 @@ def get_buy_buttons() -> InlineKeyboardMarkup:
         callback_data=OrderCallback(
             amount=1000,
             cost=150,
-            type=OrderTypes.NATAL_CHARTS
+            type=OrderTypes.NATAL_CHARTS,
+            description=_("📄 1000 analyses")
         )
     )
 
@@ -37,7 +40,8 @@ def get_buy_buttons() -> InlineKeyboardMarkup:
         callback_data=OrderCallback(
             amount=100,
             cost=5,
-            type=OrderTypes.QUESTIONS
+            type=OrderTypes.QUESTIONS,
+            description=_("💬 100 questions")
         )
     )
 
