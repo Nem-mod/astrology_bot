@@ -1,8 +1,5 @@
 import logging
-import pprint
 import sys
-
-from aiohttp.abc import BaseRequest
 
 import controllers
 import utils
@@ -45,7 +42,7 @@ async def apply_wallet_transaction(request: web.Request):
 
             user = await mongo_client.update_user(user_id, {
                 "$inc": {
-                    ctx_amount: service_amount
+                    ctx_amount: int(service_amount)
                 }
             })
 
