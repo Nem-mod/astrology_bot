@@ -71,6 +71,9 @@ async def create_telegraph_article(state_data: dict, poll_answer: types.PollAnsw
     await telegraph.create_account(short_name='JettAstro')
 
     html_content = f"{telegraph_helper.HEADER}"
+    temp_image = f"{telegraph_helper.SOURCE_DIR}/Main-min.jpg"
+    image_th_path = await telegraph.upload_file(temp_image)
+    html_content += f'<img src="{image_th_path[0]["src"]}">'
 
     for id in poll_answer.option_ids:
         temp_comp, tmp_msg = await openai_service.chat_completion(
@@ -79,7 +82,7 @@ async def create_telegraph_article(state_data: dict, poll_answer: types.PollAnsw
             messages=messages
         )
         try:
-            temp_image = telegraph_helper.TOPIC_IMAGES[id]
+            temp_image = f"{telegraph_helper.SOURCE_DIR}/{telegraph_helper.TOPIC_IMAGES[state_data['gender']][id]}"
             image_th_path = await telegraph.upload_file(temp_image)
 
             html_content += f'<img src="{image_th_path[0]["src"]}">'
