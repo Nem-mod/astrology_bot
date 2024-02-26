@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2024-02-15 18:33+0200\n"
+"POT-Creation-Date: 2024-02-26 12:40+0200\n"
 "PO-Revision-Date: 2024-02-07 15:51+0200\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: en\n"
@@ -155,23 +155,23 @@ msgid ""
 "Data: {astro_data}"
 msgstr ""
 
-#: controllers/user/utils.py:101
+#: controllers/user/utils.py:104
 msgid ""
 "Your expected image based on personal characteristics from your natal "
 "chart."
 msgstr ""
 
-#: controllers/user/utils.py:115
+#: controllers/user/utils.py:118
 msgid ""
 "For all questions and wishes, cooperation, as well as the creation of AI "
 "bots, write to me in telegram"
 msgstr ""
 
-#: controllers/user/utils.py:117
+#: controllers/user/utils.py:120
 msgid "The analysis was created using"
 msgstr ""
 
-#: controllers/user/utils.py:134
+#: controllers/user/utils.py:137
 msgid "Astrological analysis: {name} {zodiac}"
 msgstr ""
 
@@ -257,7 +257,7 @@ msgstr ""
 msgid "🤖 Free chat with the Virtual Astrologer"
 msgstr ""
 
-#: utils/TelegraphHelper.py:16
+#: utils/TelegraphHelper.py:18
 msgid ""
 "<p><i>A detailed analysis of your natal chart and an in-depth "
 "interpretation of your personality using artificial intelligence trained "
@@ -265,39 +265,39 @@ msgid ""
 "href=\"https://t.me/astrolog_ai_bot\"> AstroBot</a>.</i></p>"
 msgstr ""
 
-#: utils/TelegraphHelper.py:22
+#: utils/TelegraphHelper.py:24
 msgid "Strengths & Weaknesses"
 msgstr ""
 
-#: utils/TelegraphHelper.py:23
+#: utils/TelegraphHelper.py:25
 msgid "Career & Realization"
 msgstr ""
 
-#: utils/TelegraphHelper.py:24
+#: utils/TelegraphHelper.py:26
 msgid "Mission"
 msgstr ""
 
-#: utils/TelegraphHelper.py:25
+#: utils/TelegraphHelper.py:27
 msgid "Relationships"
 msgstr ""
 
-#: utils/TelegraphHelper.py:26
+#: utils/TelegraphHelper.py:28
 msgid "Harmony & Balance"
 msgstr ""
 
-#: utils/TelegraphHelper.py:27
+#: utils/TelegraphHelper.py:29
 msgid "Finances"
 msgstr ""
 
-#: utils/TelegraphHelper.py:28
+#: utils/TelegraphHelper.py:30
 msgid "Blog Topics"
 msgstr ""
 
-#: utils/TelegraphHelper.py:29
+#: utils/TelegraphHelper.py:31
 msgid "Success Story"
 msgstr ""
 
-#: utils/TelegraphHelper.py:44
+#: utils/TelegraphHelper.py:69
 msgid ""
 "Describe 5 unique strengths of the User and 3 areas for growth that they "
 "should work on. The answer must contain no more than 1000 characters. Add"
@@ -305,7 +305,7 @@ msgid ""
 " chart."
 msgstr ""
 
-#: utils/TelegraphHelper.py:47
+#: utils/TelegraphHelper.py:72
 msgid ""
 "What fields of activity could the user engage in to fully realize "
 "themselves? The answer must contain no more than 1500 characters. Add "
@@ -313,28 +313,28 @@ msgid ""
 "chart."
 msgstr ""
 
-#: utils/TelegraphHelper.py:50
+#: utils/TelegraphHelper.py:75
 msgid ""
 "What is the User’s mission? How can the User benefit humanity? The answer"
 " must contain no more than 1500 characters. Add emoji. The answer to this"
 " question is based on the analysis of the natal chart."
 msgstr ""
 
-#: utils/TelegraphHelper.py:52
+#: utils/TelegraphHelper.py:77
 msgid ""
 "With what partner can the User build harmonious relationships? The answer"
 " must contain no more than 1000 characters. Add emoji. The answer to this"
 " question is based on the analysis of the natal chart."
 msgstr ""
 
-#: utils/TelegraphHelper.py:54
+#: utils/TelegraphHelper.py:79
 msgid ""
 "How can the User achieve harmony and balance in life? Highlight 5 key "
 "points. The answer must contain no more than 1000 characters. Add emoji. "
 "The answer to this question is based on the analysis of the natal chart."
 msgstr ""
 
-#: utils/TelegraphHelper.py:57
+#: utils/TelegraphHelper.py:82
 msgid ""
 "How can the User achieve financial well-being? Describe one of the most "
 "suitable paths for the User. The answer must contain no more than 2000 "
@@ -345,7 +345,7 @@ msgid ""
 "purpose."
 msgstr ""
 
-#: utils/TelegraphHelper.py:62
+#: utils/TelegraphHelper.py:87
 msgid ""
 "How should a user express himself on a blog?\n"
 "\n"
@@ -372,57 +372,57 @@ msgid ""
 "answer to this question is based on analyzing a natal chart.\n"
 msgstr ""
 
-#: utils/TelegraphHelper.py:84
+#: utils/TelegraphHelper.py:109
 msgid ""
 "Write the User's success story based on the data from their natal chart. "
 "The answer must contain no more than 2000 characters. Add emoji. The "
 "answer to this question is based on all previous answers."
 msgstr ""
 
-#: utils/TelegraphHelper.py:89
+#: utils/TelegraphHelper.py:114
 msgid ""
 "<h3>Strengths & Weaknesses</h3><blockquote dir=\"auto\">What sets you "
 "apart from others, what is your superpower? And what are the growth "
 "points?</blockquote>"
 msgstr ""
 
-#: utils/TelegraphHelper.py:92
+#: utils/TelegraphHelper.py:117
 msgid ""
 "<h3>Career & Realization</h3><blockquote dir=\"auto\">Areas for your "
 "realization</blockquote>"
 msgstr ""
 
-#: utils/TelegraphHelper.py:94
+#: utils/TelegraphHelper.py:119
 msgid ""
 "<h3>Mission</h3><blockquote dir=\"auto\">Areas in which you will benefit "
 "this world by realizing yourself</blockquote>"
 msgstr ""
 
-#: utils/TelegraphHelper.py:96
+#: utils/TelegraphHelper.py:121
 msgid ""
 "<h3>Relationships</h3><blockquote dir=\"auto\">Which partner can you "
 "build a harmonious relationship with?</blockquote>"
 msgstr ""
 
-#: utils/TelegraphHelper.py:98
+#: utils/TelegraphHelper.py:123
 msgid ""
 "<h3>Harmony & Balance</h3><blockquote dir=\"auto\">What will help you "
 "achieve them?</blockquote>"
 msgstr ""
 
-#: utils/TelegraphHelper.py:100
+#: utils/TelegraphHelper.py:125
 msgid ""
 "<h3>Finances</h3><blockquote dir=\"auto\">What will help you achieve "
 "financial success?</blockquote>"
 msgstr ""
 
-#: utils/TelegraphHelper.py:102
+#: utils/TelegraphHelper.py:127
 msgid ""
 "<h3>Blog Topics</h3><blockquote dir=\"auto\">Recommendations and ideas "
 "for a blog.</blockquote>"
 msgstr ""
 
-#: utils/TelegraphHelper.py:104
+#: utils/TelegraphHelper.py:129
 msgid ""
 "<h3>Success Story</h3><blockquote dir=\"auto\">Estimated life path, based"
 " on the position of the planets at the time of your birth (consider it "

@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2024-02-15 18:33+0200\n"
-"PO-Revision-Date: 2024-02-15 18:35+0200\n"
+"POT-Creation-Date: 2024-02-26 12:40+0200\n"
+"PO-Revision-Date: 2024-02-26 12:44+0200\n"
 "Last-Translator: \n"
 "Language-Team: ru <LL@li.org>\n"
 "Language: ru\n"
@@ -162,12 +162,12 @@ msgid ""
 "misinterpreted.\n"
 "Do not use Markdown. Answer in English language"
 msgstr ""
-"Вы астролог, стремящийся к максимальной персонализации ответов на основе "
-"астрологических данных пользователя. Общайтесь на «ты», придерживаясь "
-"молодежного стиля с элементами современного сленга, но делайте это гибко и "
-"уместно. Добавляйте юмор и забавные описания там, где это адекватно и не может "
-"быть неверно истолковано.\n"
-"Не использу Markdown. Отвечай на русском языке"
+"You're an astrologer aiming for maximum personalization of responses based on "
+"the user's astrological data. Communicate using \"you\", adopting a youthful "
+"style with elements of modern slang, but do so flexibly and appropriately. "
+"Inject humor and amusing descriptions where it's adequate and cannot be "
+"misinterpreted.\n"
+"Do not use Markdown. Answer in Russian language (Русский язык)"
 
 #: controllers/user/utils.py:55
 msgid ""
@@ -181,14 +181,14 @@ msgstr ""
 "Имя клиента {name}\n"
 "Данные: {astro_data}"
 
-#: controllers/user/utils.py:101
+#: controllers/user/utils.py:104
 msgid ""
 "Your expected image based on personal characteristics from your natal chart."
 msgstr ""
 "Твой предполагаемый образ на основе личностных характеристик из натальной "
 "карты."
 
-#: controllers/user/utils.py:115
+#: controllers/user/utils.py:118
 msgid ""
 "For all questions and wishes, cooperation, as well as the creation of AI bots, "
 "write to me in telegram"
@@ -196,11 +196,11 @@ msgstr ""
 "По всем вопросам и пожеланиям, сотрудничеству, а также созданию ИИ ботов пиши "
 "мне в телеграм"
 
-#: controllers/user/utils.py:117
+#: controllers/user/utils.py:120
 msgid "The analysis was created using"
 msgstr "Разбор создан с помощью"
 
-#: controllers/user/utils.py:134
+#: controllers/user/utils.py:137
 msgid "Astrological analysis: {name} {zodiac}"
 msgstr "Астрологический анализ: {name} {zodiac}"
 
@@ -253,7 +253,7 @@ msgstr "📄 Купить 10 разборов за $10"
 
 #: keyboards/natal_chart/get_buy_buttons.py:16
 msgid "📄 10 analyses"
-msgstr "📄 10 разборов "
+msgstr "📄 10 разборов"
 
 #: keyboards/natal_chart/get_buy_buttons.py:20
 msgid "📄 Buy 30 analyses for $25"
@@ -269,7 +269,7 @@ msgstr "📄 Купить 1000 разборов за $150"
 
 #: keyboards/natal_chart/get_buy_buttons.py:34
 msgid "📄 1000 analyses"
-msgstr "📄 1000 разборов "
+msgstr "📄 1000 разборов"
 
 #: keyboards/natal_chart/get_buy_buttons.py:39
 msgid "💬 Buy 100 questions for $5"
@@ -299,7 +299,7 @@ msgstr "📄 Сделать еще один разбор"
 msgid "🤖 Free chat with the Virtual Astrologer"
 msgstr "🤖 Бесплатный чат с Виртуальным Астрологом"
 
-#: utils/TelegraphHelper.py:16
+#: utils/TelegraphHelper.py:18
 msgid ""
 "<p><i>A detailed analysis of your natal chart and an in-depth interpretation "
 "of your personality using artificial intelligence trained on the best "
@@ -311,39 +311,39 @@ msgstr ""
 "западной астрологии. Сделано с помощью <a href=\"https://t.me/"
 "astrolog_ai_bot\"> AstroBot</a>.</i></p>"
 
-#: utils/TelegraphHelper.py:22
+#: utils/TelegraphHelper.py:24
 msgid "Strengths & Weaknesses"
 msgstr "Сильные и слабые стороны"
 
-#: utils/TelegraphHelper.py:23
+#: utils/TelegraphHelper.py:25
 msgid "Career & Realization"
 msgstr "Карьера и реализация"
 
-#: utils/TelegraphHelper.py:24
+#: utils/TelegraphHelper.py:26
 msgid "Mission"
 msgstr "Миссия"
 
-#: utils/TelegraphHelper.py:25
+#: utils/TelegraphHelper.py:27
 msgid "Relationships"
 msgstr "Отношения"
 
-#: utils/TelegraphHelper.py:26
+#: utils/TelegraphHelper.py:28
 msgid "Harmony & Balance"
 msgstr "Гармония и баланс"
 
-#: utils/TelegraphHelper.py:27
+#: utils/TelegraphHelper.py:29
 msgid "Finances"
 msgstr "Финансы"
 
-#: utils/TelegraphHelper.py:28
+#: utils/TelegraphHelper.py:30
 msgid "Blog Topics"
 msgstr "Темы блога"
 
-#: utils/TelegraphHelper.py:29
+#: utils/TelegraphHelper.py:31
 msgid "Success Story"
 msgstr "История успеха"
 
-#: utils/TelegraphHelper.py:44
+#: utils/TelegraphHelper.py:69
 msgid ""
 "Describe 5 unique strengths of the User and 3 areas for growth that they "
 "should work on. The answer must contain no more than 1000 characters. Add "
@@ -353,7 +353,7 @@ msgstr ""
 "которыми ему следует работать. Ответ должен содержать не более 1000 символов. "
 "Добавьте смайлы. Ответ на этот вопрос основан на анализе натальной карты."
 
-#: utils/TelegraphHelper.py:47
+#: utils/TelegraphHelper.py:72
 msgid ""
 "What fields of activity could the user engage in to fully realize themselves? "
 "The answer must contain no more than 1500 characters. Add emoji. The answer to "
@@ -363,7 +363,7 @@ msgstr ""
 "реализовать себя? Ответ должен содержать не более 1500 символов. Добавьте "
 "смайлики. Ответ на этот вопрос основан на анализе натальной карты."
 
-#: utils/TelegraphHelper.py:50
+#: utils/TelegraphHelper.py:75
 msgid ""
 "What is the User’s mission? How can the User benefit humanity? The answer must "
 "contain no more than 1500 characters. Add emoji. The answer to this question "
@@ -373,7 +373,7 @@ msgstr ""
 "человечеству? Ответ должен содержать не более 1500 символов. Добавьте "
 "смайлики. Ответ на этот вопрос основан на анализе натальной карты."
 
-#: utils/TelegraphHelper.py:52
+#: utils/TelegraphHelper.py:77
 msgid ""
 "With what partner can the User build harmonious relationships? The answer must "
 "contain no more than 1000 characters. Add emoji. The answer to this question "
@@ -383,7 +383,7 @@ msgstr ""
 "должен содержать не более 1000 символов. Добавьте смайлы. Ответ на этот вопрос "
 "основан на анализе натальной карты."
 
-#: utils/TelegraphHelper.py:54
+#: utils/TelegraphHelper.py:79
 msgid ""
 "How can the User achieve harmony and balance in life? Highlight 5 key points. "
 "The answer must contain no more than 1000 characters. Add emoji. The answer to "
@@ -393,7 +393,7 @@ msgstr ""
 "моментов. Ответ должен содержать не более 1000 символов. Добавьте смайлы. "
 "Ответ на этот вопрос основан на анализе натальной карты."
 
-#: utils/TelegraphHelper.py:57
+#: utils/TelegraphHelper.py:82
 msgid ""
 "How can the User achieve financial well-being? Describe one of the most "
 "suitable paths for the User. The answer must contain no more than 2000 "
@@ -410,7 +410,7 @@ msgstr ""
 "ошибки может совершить пользователь. Посоветуйте, какие книги прочитать для "
 "этой цели."
 
-#: utils/TelegraphHelper.py:62
+#: utils/TelegraphHelper.py:87
 msgid ""
 "How should a user express himself on a blog?\n"
 "\n"
@@ -460,7 +460,7 @@ msgstr ""
 "Ответ должен быть не более 1500 символов. Добавьте смайлик. Ответ на этот "
 "вопрос основан на анализе натальной карты.\n"
 
-#: utils/TelegraphHelper.py:84
+#: utils/TelegraphHelper.py:109
 msgid ""
 "Write the User's success story based on the data from their natal chart. The "
 "answer must contain no more than 2000 characters. Add emoji. The answer to "
@@ -470,7 +470,7 @@ msgstr ""
 "Ответ должен содержать не более 2000 символов. Добавьте смайлы. Ответ на этот "
 "вопрос основан на всех предыдущих ответах."
 
-#: utils/TelegraphHelper.py:89
+#: utils/TelegraphHelper.py:114
 msgid ""
 "<h3>Strengths & Weaknesses</h3><blockquote dir=\"auto\">What sets you apart "
 "from others, what is your superpower? And what are the growth points?</"
@@ -479,7 +479,7 @@ msgstr ""
 "<h3>Сильные и слабые стороны</h3><blockquote dir=\"auto\">Что отличает вас от "
 "других, в чем ваша суперсила? И какие точки роста?</blockquote>"
 
-#: utils/TelegraphHelper.py:92
+#: utils/TelegraphHelper.py:117
 msgid ""
 "<h3>Career & Realization</h3><blockquote dir=\"auto\">Areas for your "
 "realization</blockquote>"
@@ -487,7 +487,7 @@ msgstr ""
 "<h3>Карьера и реализация</h3><blockquote dir=\"auto\">Области вашей "
 "реализации</blockquote>"
 
-#: utils/TelegraphHelper.py:94
+#: utils/TelegraphHelper.py:119
 msgid ""
 "<h3>Mission</h3><blockquote dir=\"auto\">Areas in which you will benefit this "
 "world by realizing yourself</blockquote>"
@@ -495,7 +495,7 @@ msgstr ""
 "<h3>Миссия</h3><blockquote dir=\"auto\">Области, в которых вы принесете пользу "
 "этому миру, реализовав себя</blockquote>"
 
-#: utils/TelegraphHelper.py:96
+#: utils/TelegraphHelper.py:121
 msgid ""
 "<h3>Relationships</h3><blockquote dir=\"auto\">Which partner can you build a "
 "harmonious relationship with?</blockquote>"
@@ -503,7 +503,7 @@ msgstr ""
 "<h3>Отношения</h3><blockquote dir=\"auto\">С каким партнером вы сможете "
 "построить гармоничные отношения?</blockquote>"
 
-#: utils/TelegraphHelper.py:98
+#: utils/TelegraphHelper.py:123
 msgid ""
 "<h3>Harmony & Balance</h3><blockquote dir=\"auto\">What will help you achieve "
 "them?</blockquote>"
@@ -511,7 +511,7 @@ msgstr ""
 "<h3>Гармония и баланс</h3><blockquote dir=\"auto\">Что поможет вам их достичь?"
 "</blockquote>"
 
-#: utils/TelegraphHelper.py:100
+#: utils/TelegraphHelper.py:125
 msgid ""
 "<h3>Finances</h3><blockquote dir=\"auto\">What will help you achieve financial "
 "success?</blockquote>"
@@ -519,7 +519,7 @@ msgstr ""
 "<h3>Финансы</h3><blockquote dir=\"auto\">Что поможет вам добиться финансового "
 "успеха?</blockquote>"
 
-#: utils/TelegraphHelper.py:102
+#: utils/TelegraphHelper.py:127
 msgid ""
 "<h3>Blog Topics</h3><blockquote dir=\"auto\">Recommendations and ideas for a "
 "blog.</blockquote>"
@@ -527,7 +527,7 @@ msgstr ""
 "<h3>Темы блога</h3><blockquote dir=\"auto\">Рекомендации и идеи для блога.</"
 "blockquote>"
 
-#: utils/TelegraphHelper.py:104
+#: utils/TelegraphHelper.py:129
 msgid ""
 "<h3>Success Story</h3><blockquote dir=\"auto\">Estimated life path, based on "
 "the position of the planets at the time of your birth (consider it one of the "
