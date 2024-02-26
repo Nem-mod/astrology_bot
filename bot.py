@@ -57,7 +57,7 @@ async def apply_wallet_transaction(request: web.Request):
             locale = user["locale"]
             if locale == "ru":
                 answer_msg = f"💰 Платеж прошел успешно."
-            if locale == "uk":
+            elif locale == "uk":
                 answer_msg = f"💰 Платіж пройшов успішно."
             else:
                 answer_msg = f"💰 Payment was successful."
